@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+// Testkommentar von Kira
 import * as _ from 'lodash'
 import * as moment from 'moment'
 import 'moment/locale/de'
