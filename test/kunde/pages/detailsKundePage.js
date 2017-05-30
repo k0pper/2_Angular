@@ -17,17 +17,17 @@
 
 // jshint expr:true
 
-const checkTitel = function(titel) {
+const checkNachname = function(nachname) {
     const {expect, click} = this
 
     // Workaround fuer Bootstrap
-    expect.element('@tabSchlagwoerter').to.be.visible
-    click('@tabSchlagwoerter')
+    expect.element('@tabInteresseType').to.be.visible
+    click('@tabInteresseType')
     expect.element('@tabStammdaten').to.be.visible
     click('@tabStammdaten')
 
     expect.element('@tabelle').to.be.visible
-    expect.element('@titel').text.to.be.equal(titel)
+    expect.element('@nachname').text.to.be.equal(nachname)
     return this
 }
 
@@ -35,8 +35,8 @@ const clickUpdateButton = function() {
     const {expect, click} = this
 
     // Workaround fuer Bootstrap
-    expect.element('@tabSchlagwoerter').to.be.visible
-    click('@tabSchlagwoerter')
+    expect.element('@tabInteresseType').to.be.visible
+    click('@tabInteresseType')
     expect.element('@tabStammdaten').to.be.visible
     click('@tabStammdaten')
 
@@ -57,14 +57,14 @@ export default {
         tabStammdaten: {
             selector: 'a[href="#stammdaten"]',
         },
-        tabSchlagwoerter: {
-            selector: 'a[href="#schlagwoerter"]',
+        tabInteresseType: {
+            selector: 'a[href="#interessen"]',
         },
         tabelle: {
             selector: 'table[class="table table-striped table-hover ' +
                                    'table-responsive"] tbody',
         },
-        titel: {
+        nachname: {
             selector: 'table[class="table table-striped table-hover ' +
                                    'table-responsive"] tbody ' +
                                    'tr:first-child td:nth-child(2)',
@@ -75,7 +75,7 @@ export default {
     },
 
     commands: [{
-        checkTitel,
+        checkNachname,
         clickUpdateButton,
         checkNoUpdateButton,
     }],

@@ -34,8 +34,8 @@
                 <thead class="thead-default">
                     <th>Nr.</th>
                     <th>ID</th>
-                    <th>Titel</th>
-                    <th>Verlag</th>
+                    <th>Nachname</th>
+                    <th>GeschlechtType</th>
                     <th>Schlagw&ouml;rter</th>
                     <th>
                         <span class="sr-only">Spalte f&uuml;r Details</span>
@@ -52,23 +52,23 @@
                         (click)="onSelect(b)" [@rowOut]="'in'">
                         <td>{{i + 1}}</td>
                         <td>{{b._id}}</td>
-                        <td>{{b.titel}}</td>
+                        <td>{{b.nachname}}</td>
                         <td>
-                            <span [ngSwitch]="b.verlag">
-                                <span *ngSwitchCase="'IWI_VERLAG'">Iwi Verlag</span>
-                                <span *ngSwitchCase="'HSKA_VERLAG'">
-                                    Hska Verlag
+                            <span [ngSwitch]="b.geschlecht">
+                                <span *ngSwitchCase="'M'">Iwi GeschlechtType</span>
+                                <span *ngSwitchCase="'W'">
+                                    Hska GeschlechtType
                                 </span>
                                 <span *ngSwitchDefault>unbekannt</span>
                             </span>
                         </td>
                         <td>
-                            <span *ngFor="let sw of b.schlagwoerter">
+                            <span *ngFor="let sw of b.interessen">
                                 <span [ngSwitch]="sw">
-                                    <span *ngSwitchCase="'JAVASCRIPT'">
+                                    <span *ngSwitchCase="'S'">
                                         JavaScript<br>
                                     </span>
-                                    <span *ngSwitchCase="'TYPESCRIPT'">
+                                    <span *ngSwitchCase="'L'">
                                         TypeScript
                                     </span>
                                 </span>

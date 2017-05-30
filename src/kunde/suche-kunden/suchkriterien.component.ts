@@ -18,7 +18,7 @@
 import {Component, EventEmitter, Output} from '@angular/core'
 
 import {log} from '../../shared'
-import {KundeArt, Verlag} from '../shared/kunde'
+import {FamilienstandType, GeschlechtType} from '../shared/kunde'
 import {KundeService} from '../shared/kunde.service'
 
 /**
@@ -29,11 +29,11 @@ import {KundeService} from '../shared/kunde.service'
     templateUrl: './suchkriterien.component.html',
 })
 export default class SuchkriterienComponent {
-    titel: string|null = null
-    verlag: Verlag|null = null
-    art: KundeArt|null = null
-    javascript = false
-    typescript = false
+    nachname: string|null = null
+    geschlecht: GeschlechtType|null = null
+    familienstand: FamilienstandType|null = null
+    sport = false
+    lesen = false
 
     // Event Binding: <hs-suchkriterien (waiting)="...">
     // Observables = Event-Streaming mit Promises
@@ -54,11 +54,11 @@ export default class SuchkriterienComponent {
     @log
     onFind() {
         const suchkriterien: any = {
-            titel: this.titel,
-            verlag: this.verlag,
-            art: this.art,
-            javascript: this.javascript,
-            typescript: this.typescript,
+            nachname: this.nachname,
+            geschlecht: this.geschlecht,
+            familienstand: this.familienstand,
+            sport: this.sport,
+            lesen: this.lesen,
         }
         console.log('suchkriterien=', suchkriterien)
 

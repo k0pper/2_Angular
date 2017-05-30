@@ -16,7 +16,7 @@
  */
 
 const SCHEME = 'https'
-const PORT = 8443
+const PORT = 8444
 const SERVERNAME = 'localhost'
 const BASE_PATH = '/'
 
@@ -28,7 +28,7 @@ export const BASE_URI = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`
 /**
  * Pfad f&uuml;r den Zugriff auf B&uuml;cher, ausgehend von der Basis-URI.
  */
-export const PATH_BUCH = `kunde`
+export const PATH_KUNDE = `kunde`
 
 export const TIMEZONE_OFFSET_MS =
     new Date().getTimezoneOffset() * 60 * 1000

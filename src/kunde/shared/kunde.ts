@@ -28,8 +28,8 @@ moment.locale('de')
 const MIN_RATING = 0
 const MAX_RATING = 5
 
-export declare type Verlag = 'IWI_VERLAG' | 'HSKA_VERLAG'
-export declare type KundeArt = 'KINDLE' | 'DRUCKAUSGABE'
+export declare type GeschlechtType = 'M' | 'W'
+export declare type FamilienstandType = 'L' | 'VH'
 
 /**
  * Gemeinsame Datenfelder unabh&auml;ngig, ob die Kundedaten von einem Server
@@ -37,13 +37,13 @@ export declare type KundeArt = 'KINDLE' | 'DRUCKAUSGABE'
  */
 export interface KundeShared {
     _id?: string|undefined
-    titel?: string|undefined
-    verlag?: Verlag|undefined
-    art: KundeArt|undefined
-    preis: number|undefined
+    nachname?: string|undefined
+    geschlecht?: GeschlechtType|undefined
+    familienstand: FamilienstandType|undefined
+    umsatz: number|undefined
     rabatt: number|undefined
-    datum: string|undefined
-    lieferbar: boolean|undefined
+    geburtsdatum: string|undefined
+    newsletter: boolean|undefined
     email: string|undefined
 }
 
@@ -58,7 +58,7 @@ export interface KundeShared {
  */
 export interface KundeServer extends KundeShared {
     rating: number|undefined
-    schlagwoerter?: Array<string>|undefined
+    interessen?: Array<string>|undefined
 }
 
 /**
@@ -70,8 +70,8 @@ export interface KundeServer extends KundeShared {
  */
 export interface KundeForm extends KundeShared {
     rating: string
-    javascript?: boolean
-    typescript?: boolean
+    sport?: boolean
+    lesen?: boolean
 }
 
 /**
@@ -88,15 +88,15 @@ export class Kunde {
      * @return Das initialisierte Kunde-Objekt
      */
     static fromServer(kundeServer: KundeServer) {
-        let datum: moment.Moment|undefined
-        if (isPresent(kundeServer.datum)) {
-            const tmp = kundeServer.datum as string
-            datum = moment(tmp)
+        let geburtsdatum: moment.Moment|undefined
+        if (isPresent(kundeServer.geburtsdatum)) {
+            const tmp = kundeServer.geburtsdatum as string
+            geburtsdatum = moment(tmp)
         }
         const kunde = new Kunde(
-            kundeServer._id, kundeServer.titel, kundeServer.rating, kundeServer.art,
-            kundeServer.verlag, datum, kundeServer.preis, kundeServer.rabatt,
-            kundeServer.lieferbar, kundeServer.schlagwoerter, kundeServer.email)
+            kundeServer._id, kundeServer.nachname, kundeServer.rating, kundeServer.familienstand,
+            kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, kundeServer.rabatt,
+            kundeServer.newsletter, kundeServer.interessen, kundeServer.email)
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
     }
@@ -107,23 +107,23 @@ export class Kunde {
      * @return Das initialisierte Kunde-Objekt
      */
     static fromForm(kundeForm: KundeForm) {
-        const schlagwoerter: Array<string> = []
-        if (kundeForm.javascript) {
-            schlagwoerter.push('JAVASCRIPT')
+        const interessen: Array<string> = []
+        if (kundeForm.sport) {
+            interessen.push('S')
         }
-        if (kundeForm.typescript) {
-            schlagwoerter.push('TYPESCRIPT')
+        if (kundeForm.lesen) {
+            interessen.push('L')
         }
 
-        const datumMoment = isEmpty(kundeForm.datum) ?
+        const datumMoment = isEmpty(kundeForm.geburtsdatum) ?
             undefined :
-            moment(kundeForm.datum as string)
+            moment(kundeForm.geburtsdatum as string)
 
         const rabatt = kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
         const kunde = new Kunde(
-            kundeForm._id, kundeForm.titel, +kundeForm.rating, kundeForm.art,
-            kundeForm.verlag, datumMoment, kundeForm.preis, rabatt,
-            kundeForm.lieferbar, schlagwoerter, kundeForm.email)
+            kundeForm._id, kundeForm.nachname, +kundeForm.rating, kundeForm.familienstand,
+            kundeForm.geschlecht, datumMoment, kundeForm.umsatz, rabatt,
+            kundeForm.newsletter, interessen, kundeForm.email)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
     }
@@ -131,34 +131,34 @@ export class Kunde {
     // http://momentjs.com
     get datumFormatted() {
         let result: string|undefined
-        if (isPresent(this.datum)) {
-            const datum = this.datum as moment.Moment
-            result = datum.format('Do MMM YYYY')
+        if (isPresent(this.geburtsdatum)) {
+            const geburtsdatum = this.geburtsdatum as moment.Moment
+            result = geburtsdatum.format('Do MMM YYYY')
         }
         return result
     }
 
     get datumFromNow() {
         let result: string|undefined
-        if (isPresent(this.datum)) {
-            const datum = this.datum as moment.Moment
-            result = datum.fromNow()
+        if (isPresent(this.geburtsdatum)) {
+            const geburtsdatum = this.geburtsdatum as moment.Moment
+            result = geburtsdatum.fromNow()
         }
         return result
     }
 
     /**
-     * Abfrage, ob im Kundetitel der angegebene Teilstring enthalten ist. Dabei
+     * Abfrage, ob im Kundenachname der angegebene Teilstring enthalten ist. Dabei
      * wird nicht auf Gross-/Kleinschreibung geachtet.
-     * @param titel Zu &uuml;berpr&uuml;fender Teilstring
-     * @return true, falls der Teilstring im Kundetitel enthalten ist. Sonst
+     * @param nachname Zu &uuml;berpr&uuml;fender Teilstring
+     * @return true, falls der Teilstring im Kundenachname enthalten ist. Sonst
      *         false.
      */
-    containsTitel(titel: string) {
+    containsNachname(nachname: string) {
         let result = true
-        if (isPresent(this.titel)) {
-            const tmp = this.titel as string
-            result = tmp.toLowerCase().includes(titel.toLowerCase())
+        if (isPresent(this.nachname)) {
+            const tmp = this.nachname as string
+            result = tmp.toLowerCase().includes(nachname.toLowerCase())
         }
         return result
     }
@@ -182,75 +182,75 @@ export class Kunde {
     }
 
     /**
-     * Abfrage, ob das Kunde dem angegebenen Verlag zugeordnet ist.
-     * @param verlag der Name des Verlags
-     * @return true, falls das Kunde dem Verlag zugeordnet ist. Sonst false.
+     * Abfrage, ob das Kunde dem angegebenen GeschlechtType zugeordnet ist.
+     * @param geschlecht der Name des GeschlechtTypes
+     * @return true, falls das Kunde dem GeschlechtType zugeordnet ist. Sonst false.
      */
-    hasVerlag(verlag: string) {
-        return this.verlag === verlag
+    hasGeschlechtType(geschlecht: string) {
+        return this.geschlecht === geschlecht
     }
 
     /**
      * Aktualisierung der Stammdaten des Kunde-Objekts.
-     * @param titel Der neue Kundetitel
+     * @param nachname Der neue Kundenachname
      * @param rating Die neue Bewertung
-     * @param art Die neue Kundeart (DRUCKAUSGABE oder KINDLE)
-     * @param verlag Der neue Verlag
-     * @param preis Der neue Preis
+     * @param familienstand Die neue Kundeart (VH oder L)
+     * @param geschlecht Der neue GeschlechtType
+     * @param umsatz Der neue Umsatz
      * @param rabatt Der neue Rabatt
      */
     updateStammdaten(
-        titel: string, art: KundeArt, verlag: Verlag, rating: number,
-        datum: moment.Moment|undefined, preis: number|undefined,
+        nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType, rating: number,
+        geburtsdatum: moment.Moment|undefined, umsatz: number|undefined,
         rabatt: number|undefined) {
-        this.titel = titel
-        this.art = art
-        this.verlag = verlag
+        this.nachname = nachname
+        this.familienstand = familienstand
+        this.geschlecht = geschlecht
         this.rating = rating
         this.ratingArray = []
         _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
-        this.datum = datum
-        this.preis = preis
+        this.geburtsdatum = geburtsdatum
+        this.umsatz = umsatz
         this.rabatt = rabatt
     }
 
     /**
      * Abfrage, ob es zum Kunde auch Schlagw&ouml;rter gibt.
-     * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
+     * @return true, falls es mindestens ein Interesse gibt. Sonst false.
      */
-    hasSchlagwoerter() {
-        if (isBlank(this.schlagwoerter)) {
+    hasInteresseType() {
+        if (isBlank(this.interessen)) {
             return false
         }
-        const tmpSchlagwoerter = this.schlagwoerter as Array<string>
-        return tmpSchlagwoerter.length !== 0
+        const tmpInteresseType = this.interessen as Array<string>
+        return tmpInteresseType.length !== 0
     }
 
     /**
-     * Abfrage, ob es zum Kunde das angegebene Schlagwort gibt.
-     * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
-     * @return true, falls es das Schlagwort gibt. Sonst false.
+     * Abfrage, ob es zum Kunde das angegebene Interesse gibt.
+     * @param interesse das zu &uuml;berpr&uuml;fende Interesse
+     * @return true, falls es das Interesse gibt. Sonst false.
      */
-    hasSchlagwort(schlagwort: string) {
-        if (isBlank(this.schlagwoerter)) {
+    hasInteresse(interesse: string) {
+        if (isBlank(this.interessen)) {
             return false
         }
-        const tmpSchlagwoerter = this.schlagwoerter as Array<string>
-        return tmpSchlagwoerter.includes(schlagwort)
+        const tmpInteresseType = this.interessen as Array<string>
+        return tmpInteresseType.includes(interesse)
     }
 
     /**
      * Aktualisierung der Schlagw&ouml;rter des Kunde-Objekts.
-     * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
-     * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
+     * @param sport ist das Interesse S gesetzt
+     * @param lesen ist das Interesse L gesetzt
      */
-    updateSchlagwoerter(javascript: boolean, typescript: boolean) {
-        this.resetSchlagwoerter()
-        if (javascript) {
-            this.addSchlagwort('JAVASCRIPT')
+    updateInteresseType(sport: boolean, lesen: boolean) {
+        this.resetInteresseType()
+        if (sport) {
+            this.addInteresse('S')
         }
-        if (typescript) {
-            this.addSchlagwort('TYPESCRIPT')
+        if (lesen) {
+            this.addInteresse('L')
         }
     }
 
@@ -260,20 +260,20 @@ export class Kunde {
      * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
      */
     toJSON(): KundeServer {
-        const datum = this.datum === undefined ?
+        const geburtsdatum = this.geburtsdatum === undefined ?
             undefined :
-            this.datum.format('YYYY-MM-DD')
+            this.geburtsdatum.format('YYYY-MM-DD')
         return {
             _id: this._id,
-            titel: this.titel,
+            nachname: this.nachname,
             rating: this.rating,
-            art: this.art,
-            verlag: this.verlag,
-            datum,
-            preis: this.preis,
+            familienstand: this.familienstand,
+            geschlecht: this.geschlecht,
+            geburtsdatum,
+            umsatz: this.umsatz,
             rabatt: this.rabatt,
-            lieferbar: this.lieferbar,
-            schlagwoerter: this.schlagwoerter,
+            newsletter: this.newsletter,
+            interessen: this.interessen,
             email: this.email,
         }
     }
@@ -285,29 +285,29 @@ export class Kunde {
     // wird aufgerufen von fromServer() oder von fromForm()
     private constructor(
         // tslint:disable-next-line:variable-name
-        public _id: string|undefined, public titel: string|undefined,
-        public rating: number|undefined, public art: KundeArt|undefined,
-        public verlag: Verlag|undefined, public datum: moment.Moment|undefined,
-        public preis: number|undefined, public rabatt: number|undefined,
-        public lieferbar: boolean|undefined,
-        public schlagwoerter: Array<string>|undefined,
+        public _id: string|undefined, public nachname: string|undefined,
+        public rating: number|undefined, public familienstand: FamilienstandType|undefined,
+        public geschlecht: GeschlechtType|undefined, public geburtsdatum: moment.Moment|undefined,
+        public umsatz: number|undefined, public rabatt: number|undefined,
+        public newsletter: boolean|undefined,
+        public interessen: Array<string>|undefined,
         public email: string|undefined) {
         this._id = _id || undefined
-        this.titel = titel || undefined
+        this.nachname = nachname || undefined
         this.rating = rating || undefined
-        this.art = art || undefined
-        this.verlag = verlag || undefined
-        this.datum =
-            isPresent(datum) ? datum : moment(new Date().toISOString())
-        this.preis = preis || undefined
+        this.familienstand = familienstand || undefined
+        this.geschlecht = geschlecht || undefined
+        this.geburtsdatum =
+            isPresent(geburtsdatum) ? geburtsdatum : moment(new Date().toISOString())
+        this.umsatz = umsatz || undefined
         this.rabatt = rabatt || undefined
-        this.lieferbar = lieferbar || undefined
+        this.newsletter = newsletter || undefined
 
-        if (isBlank(schlagwoerter)) {
-            this.schlagwoerter = []
+        if (isBlank(interessen)) {
+            this.interessen = []
         } else {
-            const tmpSchlagwoerter = schlagwoerter as Array<string>
-            this.schlagwoerter = tmpSchlagwoerter
+            const tmpInteresseType = interessen as Array<string>
+            this.interessen = tmpInteresseType
         }
         if (rating !== undefined) {
             _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
@@ -316,15 +316,15 @@ export class Kunde {
         this.email = email || undefined
     }
 
-    private resetSchlagwoerter() {
-        this.schlagwoerter = []
+    private resetInteresseType() {
+        this.interessen = []
     }
 
-    private addSchlagwort(schlagwort: string) {
-        if (isBlank(this.schlagwoerter)) {
-            this.schlagwoerter = []
+    private addInteresse(interesse: string) {
+        if (isBlank(this.interessen)) {
+            this.interessen = []
         }
-        const tmpSchlagwoerter = this.schlagwoerter as Array<string>
-        tmpSchlagwoerter.push(schlagwort)
+        const tmpInteresseType = this.interessen as Array<string>
+        tmpInteresseType.push(interesse)
     }
 }

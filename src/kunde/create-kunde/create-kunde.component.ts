@@ -44,19 +44,19 @@ export default class CreateKundeComponent implements OnInit {
     //    serverseitig mittels Request/Response
     //    clientseitig bei den Ereignissen keyup, change, ...
     // Ein Endbenutzer bewirkt staendig einen neuen Fehlerstatus
-    readonly titel: FormControl = new FormControl(null, Validators.compose([
+    readonly nachname: FormControl = new FormControl(null, Validators.compose([
         Validators.required, Validators.minLength(2),
         Validators.pattern(/^\w.*$/),
     ]))
     readonly rating: FormControl = new FormControl(null)
-    readonly art: FormControl = new FormControl('DRUCKAUSGABE')
-    readonly verlag: FormControl = new FormControl(null)
-    readonly preis: FormControl = new FormControl(null)
+    readonly familienstand: FormControl = new FormControl('VH')
+    readonly geschlecht: FormControl = new FormControl(null)
+    readonly umsatz: FormControl = new FormControl(null)
     readonly rabatt: FormControl = new FormControl(null)
-    readonly datum: FormControl = new FormControl(null)
-    readonly lieferbar: FormControl = new FormControl(false)
-    readonly javascript: FormControl = new FormControl(false)
-    readonly typescript: FormControl = new FormControl(false)
+    readonly geburtsdatum: FormControl = new FormControl(null)
+    readonly newsletter: FormControl = new FormControl(false)
+    readonly sport: FormControl = new FormControl(false)
+    readonly lesen: FormControl = new FormControl(false)
     readonly email: FormControl =
         new FormControl(null, [Validators.required, KundeValidator.email] as any)
 
@@ -80,16 +80,16 @@ export default class CreateKundeComponent implements OnInit {
     ngOnInit() {
         this.form = this.formBuilder.group({
             // siehe formControlName innerhalb @Component({template: ...})
-            titel: this.titel,
+            nachname: this.nachname,
             rating: this.rating,
-            art: this.art,
-            verlag: this.verlag,
-            preis: this.preis,
+            familienstand: this.familienstand,
+            geschlecht: this.geschlecht,
+            umsatz: this.umsatz,
             rabatt: this.rabatt,
-            datum: this.datum,
-            lieferbar: this.lieferbar,
-            javascript: this.javascript,
-            typescript: this.typescript,
+            geburtsdatum: this.geburtsdatum,
+            newsletter: this.newsletter,
+            sport: this.sport,
+            lesen: this.lesen,
             email: this.email,
         })
 

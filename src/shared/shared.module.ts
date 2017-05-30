@@ -23,7 +23,7 @@ import {ModuleWithProviders, NgModule, Type} from '@angular/core'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 // HTTP-Methoden fuer REST
 import {HttpModule} from '@angular/http'
-// Titel im Tab aendern
+// Nachname im Tab aendern
 import {Title} from '@angular/platform-browser'
 // mind. 1x Animation
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'

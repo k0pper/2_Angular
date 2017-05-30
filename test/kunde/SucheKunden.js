@@ -42,30 +42,30 @@ export default {
             .checkAlleKunden()
     },
 
-    'Suche Kunden mit "a" im Titel'() {
+    'Suche Kunden mit "a" im Nachname'() {
         // Given
-        const titel = 'a'
+        const nachname = 'a'
 
         // When
         this.client.page
             .sucheKundenPage()
             .navigate()
-            .titel(titel)
+            .nachname(nachname)
             .submit()
 
             // Then
-            .checkGefundeneKunden(titel)
+            .checkGefundeneKunden(nachname)
     },
 
     'Suche mit Fehlermeldung'() {
         // Given
-        const titel = 'XXX'
+        const nachname = 'XXX'
 
         // When
         this.client.page
             .sucheKundenPage()
             .navigate()
-            .titel(titel)
+            .nachname(nachname)
             .submit()
 
             // Then

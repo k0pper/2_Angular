@@ -29,21 +29,21 @@ export default {
         done()
     },
 
-    'Details zu Kunde mit Titel "Beta"'() {
+    'Details zu Kunde mit Nachname "Beta"'() {
         // Given
-        const titel = 'Beta'
+        const nachname = 'Beta'
         const {page} = this.client
 
         // When
         page.sucheKundenPage()
             .navigate()
-            .titel(titel)
+            .nachname(nachname)
             .submit()
-            .clickTitelErsteZeile(titel)
+            .clickNachnameErsteZeile(nachname)
 
         // Then
         page.detailsKundePage()
-            .checkTitel(titel)
+            .checkNachname(nachname)
             .checkNoUpdateButton()
     },
 }

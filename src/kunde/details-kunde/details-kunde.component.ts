@@ -75,9 +75,9 @@ export default class DetailsKundeComponent implements OnInit {
             this.kunde = kunde
             console.log('DetailsKundeComponent.kunde=', this.kunde)
 
-            const titel =
+            const nachname =
                 this.kunde === null ? 'Details' : `Details ${this.kunde._id}`
-            this.titleService.setTitle(titel)
+            this.titleService.setTitle(nachname)
         }
         this.kundeService.observeKunde(next)
     }

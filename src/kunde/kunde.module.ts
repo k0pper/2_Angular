@@ -24,7 +24,7 @@ import SharedModule from '../shared/shared.module'
 import CreateKundeComponent from './create-kunde/create-kunde.component'
 import CreateKundeGuard from './create-kunde/create-kunde.guard'
 import DetailsKundeComponent from './details-kunde/details-kunde.component'
-import DetailsSchlagwoerterComponent from './details-kunde/details-schlagwoerter.component'
+import DetailsInteresseTypeComponent from './details-kunde/details-interessen.component'
 import DetailsStammdatenComponent from './details-kunde/details-stammdaten.component'
 import BalkendiagrammComponent from './diagramme/balkendiagramm.component'
 import LiniendiagrammComponent from './diagramme/liniendiagramm.component'
@@ -34,7 +34,7 @@ import SucheKundenComponent from './suche-kunden/suche-kunden.component'
 import SuchergebnisComponent from './suche-kunden/suchergebnis.component'
 import SuchkriterienComponent from './suche-kunden/suchkriterien.component'
 import UpdateKundeComponent from './update-kunde/update-kunde.component'
-import UpdateSchlagwoerterComponent from './update-kunde/update-schlagwoerter.component'
+import UpdateInteresseTypeComponent from './update-kunde/update-interessen.component'
 import UpdateStammdatenComponent from './update-kunde/update-stammdaten.component'
 
 const komponentenExport: Array<Type<any>> = [
@@ -44,9 +44,9 @@ const komponentenExport: Array<Type<any>> = [
 ]
 
 const komponentenIntern: Array<Type<any>> = [
-    DetailsSchlagwoerterComponent, DetailsStammdatenComponent,
+    DetailsInteresseTypeComponent, DetailsStammdatenComponent,
     SucheKundenComponent, SuchergebnisComponent, SuchkriterienComponent,
-    UpdateSchlagwoerterComponent, UpdateStammdatenComponent,
+    UpdateInteresseTypeComponent, UpdateStammdatenComponent,
 ]
 
 // Ein Modul enthaelt logisch zusammengehoerige Funktionalitaet.

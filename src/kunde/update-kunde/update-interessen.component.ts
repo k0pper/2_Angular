@@ -25,50 +25,50 @@ import {Kunde} from '../shared'
 import {KundeService} from '../shared/kunde.service'
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-schlagwoerter</code>
+ * Komponente f&uuml;r das Tag <code>hs-interessen</code>
  */
 @Component({
-    selector: 'hs-update-schlagwoerter',
-    templateUrl: './update-schlagwoerter.component.html',
+    selector: 'hs-update-interessen',
+    templateUrl: './update-interessen.component.html',
 })
-export default class UpdateSchlagwoerterComponent implements OnInit {
-    // <hs-schlagwoerter [kunde]="...">
+export default class UpdateInteresseTypeComponent implements OnInit {
+    // <hs-interessen [kunde]="...">
     @Input() kunde: Kunde
 
     form: FormGroup
-    javascript: FormControl
-    typescript: FormControl
+    sport: FormControl
+    lesen: FormControl
 
     constructor(
         private readonly formBuilder: FormBuilder,
         private readonly kundeService: KundeService,
         private readonly router: Router) {
-        console.log('UpdateSchlagwoerterComponent.constructor()')
+        console.log('UpdateInteresseTypeComponent.constructor()')
     }
 
     /**
      * Das Formular als Gruppe von Controls initialisieren und mit den
-     * Schlagwoertern des zu &auml;ndernden Kundes vorbelegen.
+     * InteresseTypen des zu &auml;ndernden Kundes vorbelegen.
      */
     @log
     ngOnInit() {
         console.log('kunde=', this.kunde)
 
         // Definition und Vorbelegung der Eingabedaten (hier: Checkbox)
-        const hasJavaScript = this.kunde.hasSchlagwort('JAVASCRIPT')
-        this.javascript = new FormControl(hasJavaScript)
-        const hasTypeScript = this.kunde.hasSchlagwort('TYPESCRIPT')
-        this.typescript = new FormControl(hasTypeScript)
+        const hasJavaScript = this.kunde.hasInteresse('S')
+        this.sport = new FormControl(hasJavaScript)
+        const hasTypeScript = this.kunde.hasInteresse('L')
+        this.lesen = new FormControl(hasTypeScript)
 
         this.form = this.formBuilder.group({
             // siehe ngFormControl innerhalb von @Component({template: `...`})
-            javascript: this.javascript,
-            typescript: this.typescript,
+            sport: this.sport,
+            lesen: this.lesen,
         })
     }
 
     /**
-     * Die aktuellen Schlagwoerter f&uuml;r das angezeigte Kunde-Objekt
+     * Die aktuellen InteresseType f&uuml;r das angezeigte Kunde-Objekt
      * zur&uuml;ckschreiben.
      * @return false, um das durch den Button-Klick ausgel&ouml;ste Ereignis
      *         zu konsumieren.
@@ -85,13 +85,13 @@ export default class UpdateSchlagwoerterComponent implements OnInit {
             return
         }
 
-        this.kunde.updateSchlagwoerter(
-            this.javascript.value, this.typescript.value)
+        this.kunde.updateInteresseType(
+            this.sport.value, this.lesen.value)
         console.log('kunde=', this.kunde)
 
         const successFn = () => {
             console.log(
-                `UpdateSchlagwoerterComponent: successFn: path: ${HOME_PATH}`)
+                `UpdateInteresseTypeComponent: successFn: path: ${HOME_PATH}`)
             this.router.navigate([HOME_PATH])
         }
         const errorFn: (status: number, text: string) => void | undefined =
@@ -105,6 +105,6 @@ export default class UpdateSchlagwoerterComponent implements OnInit {
     }
 
     toString() {
-        return 'UpdateSchlagwoerterComponent'
+        return 'UpdateInteresseTypeComponent'
     }
 }

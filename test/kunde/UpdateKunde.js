@@ -29,10 +29,10 @@ export default {
         done()
     },
 
-    'Kunde mit Titel "Gamma" aktualisieren'() {
+    'Kunde mit Nachname "Gamma" aktualisieren'() {
         // Given
-        const titel = 'Gamma'
-        const neuerTitel = 'Geaendert'
+        const nachname = 'Gamma'
+        const neuerNachname = 'Geaendert'
         const {page} = this.client
 
         // When
@@ -45,19 +45,19 @@ export default {
 
         page.header().clickSuche()
         page.sucheKundenPage()
-            .titel(titel)
+            .nachname(nachname)
             .submit()
-            .clickTitelErsteZeile(titel)
+            .clickNachnameErsteZeile(nachname)
         page.detailsKundePage().clickUpdateButton()
-        page.updateKundePage().updateTitel(neuerTitel)
+        page.updateKundePage().updateNachname(neuerNachname)
 
         // Then
         page.header().clickSuche()
         page.sucheKundenPage()
-            .titel(neuerTitel)
+            .nachname(neuerNachname)
             .submit()
-            .clickTitelErsteZeile(neuerTitel)
-        page.detailsKundePage().checkTitel(neuerTitel)
+            .clickNachnameErsteZeile(neuerNachname)
+        page.detailsKundePage().checkNachname(neuerNachname)
 
         page.authPage().logout().checkLogout()
     },

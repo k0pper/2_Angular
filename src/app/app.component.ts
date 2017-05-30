@@ -100,7 +100,7 @@ import {Component} from '@angular/core'
     // Light DOM:    Der Baum, in den der Shadow-DOM eingefuegt wird,
     //               z.B. <suche>
     // Shadow DOM:   Der Baum, der innerhalb des Light DOM eingefuegt wird,
-    //               z.B. das Template aus SucheTitel.
+    //               z.B. das Template aus SucheNachname.
     //               Dieser Baum ist zunaechst vor dem Endbenutzer verborgen
     // http://webcomponents.org/polyfills/shadow-dom
     // http://w3c.github.io/webcomponents/spec/shadow

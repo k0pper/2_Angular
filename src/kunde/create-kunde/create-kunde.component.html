@@ -45,19 +45,19 @@
             </div>
 
             <div class="form-group row"
-                [class.has-danger]="!titel.valid && titel.touched">
-                <label for="titelInput" class="col col-2 form-control-label">
-                    Titel *
+                [class.has-danger]="!nachname.valid && nachname.touched">
+                <label for="nachnameInput" class="col col-2 form-control-label">
+                    Nachname *
                 </label>
                 <div class="col col-10">
-                    <input id="titelInput"
-                        placeholder="Titel"
+                    <input id="nachnameInput"
+                        placeholder="Nachname"
                         class="form-control"
                         autofocus
-                        formControlName="titel">
+                        formControlName="nachname">
                     <div class="fa fa-exclamation-circle form-control-feedback"
-                        *ngIf="!titel.valid && titel.touched">
-                        Ein Kundetitel muss mit einem Kundestaben oder einer
+                        *ngIf="!nachname.valid && nachname.touched">
+                        Ein Kundenachname muss mit einem Buchstaben oder einer
                         Ziffer beginnen und mindestens 2 Zeichen lang sein.
                     </div>
                 </div>
@@ -88,55 +88,55 @@
                 <div class="col col-10">
                     <div class="radio">
                         <label class="radio-inline">
-                            <input type="radio" formControlName="art"
-                                   name="art" value="DRUCKAUSGABE"> Druckausgabe
+                            <input type="radio" formControlName="familienstand"
+                                   name="familienstand" value="VH"> Druckausgabe
                         </label>
                     </div>
                     <div class="radio">
                         <label class="radio-inline">
-                            <input type="radio" formControlName="art"
-                                   name="art" value="KINDLE"> Kindle
+                            <input type="radio" formControlName="familienstand"
+                                   name="familienstand" value="L"> Kindle
                         </label>
                     </div>
                 </div>
             </div>
 
             <div class="form-group row"
-                [class.has-danger]="!verlag.valid && verlag.touched">
-                <label class="col col-2 form-control-label">Verlag *</label>
+                [class.has-danger]="!geschlecht.valid && geschlecht.touched">
+                <label class="col col-2 form-control-label">GeschlechtType *</label>
                 <div class="col col-10">
                     <select class="form-control form-control-danger"
-                            formControlName="verlag" required>
-                        <option value="">Einen Verlag ausw&auml;hlen</option>
-                        <option value="IWI_VERLAG">Iwi Verlag</option>
-                        <option value="HSKA_VERLAG">Hska Verlag</option>
+                            formControlName="geschlecht" required>
+                        <option value="">Einen GeschlechtType ausw&auml;hlen</option>
+                        <option value="M">Iwi GeschlechtType</option>
+                        <option value="W">Hska GeschlechtType</option>
                     </select>
                     <!-- http://www.quackit.com/bootstrap/bootstrap_4/tutorial/bootstrap_dropdowns.cfm -->
                     <div class="fa fa-exclamation-circle form-control-feedback"
-                        *ngIf="!verlag.valid && verlag.touched">
-                        Ein Verlag ist erforderlich.
+                        *ngIf="!geschlecht.valid && geschlecht.touched">
+                        Ein GeschlechtType ist erforderlich.
                     </div>
                 </div>
             </div>
 
             <div class="form-group row"
-                [class.has-danger]="!preis.valid && preis.touched">
-                <label for="preisInput" class="col col-2 form-control-label">
-                    Preis *
+                [class.has-danger]="!umsatz.valid && umsatz.touched">
+                <label for="umsatzInput" class="col col-2 form-control-label">
+                    Umsatz *
                 </label>
                 <div class="col col-10">
                     <div class="input-group">
-                        <input id="preisInput"
-                            placeholder="Preis, z.B. 123.45"
+                        <input id="umsatzInput"
+                            placeholder="Umsatz, z.B. 123.45"
                             required
                             class="form-control form-control-danger"
                             type="number"
-                            formControlName="preis"/>
+                            formControlName="umsatz"/>
                         <span class="input-group-addon">EUR</span>
                     </div>
                     <div class="fa fa-exclamation-circle form-control-feedback"
-                        *ngIf="!preis.valid && preis.touched">
-                        Ein Preis muss eingegeben werden, z.B. 123.45
+                        *ngIf="!umsatz.valid && umsatz.touched">
+                        Ein Umsatz muss eingegeben werden, z.B. 123.45
                     </div>
                 </div>
             </div>
@@ -165,32 +165,32 @@
 
             <div class="form-group row">
                 <label for="datumInput" class="col col-2 form-control-label">
-                    Datum
+                    Geburtsdatum
                 </label>
                 <div class="col col-10">
                     <input id="datumInput"
                         class="form-control"
                         type="date"
-                        formControlName="datum"/>
+                        formControlName="geburtsdatum"/>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="lieferbarInput" class="col col-2 form-control-label">
-                    Lieferbar?
+                <label for="newsletterInput" class="col col-2 form-control-label">
+                    Newsletter?
                 </label>
                 <div class="col col-10">
                     <div class="checkbox">
                         <label>
-                            <input id="lieferbarInput" type="checkbox"
-                                   formControlName="lieferbar"/>
+                            <input id="newsletterInput" type="checkbox"
+                                   formControlName="newsletter"/>
                         </label>
                     </div>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="schlagwoerterInput"
+                <label for="interessenInput"
                        class="col col-2 form-control-label">
                     Schlagw&ouml;rter
                 </label>
@@ -198,14 +198,14 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"
-                                   formControlName="javascript"/>
+                                   formControlName="sport"/>
                             JavaScript
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"
-                                   formControlName="typescript"/>
+                                   formControlName="lesen"/>
                             TypeScript
                         </label>
                     </div>

@@ -36,9 +36,9 @@ export default class UpdateStammdatenComponent implements OnInit {
     @Input() kunde: Kunde
 
     form: FormGroup
-    titel: FormControl
-    art: FormControl
-    verlag: FormControl
+    nachname: FormControl
+    familienstand: FormControl
+    geschlecht: FormControl
     rating: FormControl
 
     constructor(
@@ -57,22 +57,22 @@ export default class UpdateStammdatenComponent implements OnInit {
         console.log('kunde=', this.kunde)
 
         // Definition und Vorbelegung der Eingabedaten
-        this.titel = new FormControl(this.kunde.titel, Validators.compose([
+        this.nachname = new FormControl(this.kunde.nachname, Validators.compose([
             Validators.required, Validators.minLength(2),
             Validators.pattern(/^\w.*$/),
         ]))
-        this.art = new FormControl(this.kunde.art, Validators.required)
-        this.verlag = new FormControl(this.kunde.verlag)
+        this.familienstand = new FormControl(this.kunde.familienstand, Validators.required)
+        this.geschlecht = new FormControl(this.kunde.geschlecht)
         this.rating = new FormControl(this.kunde.rating)
-        // this.datum = new Control(this.kunde.datum.toISOString())
+        // this.geburtsdatum = new Control(this.kunde.geburtsdatum.toISOString())
 
         this.form = this.formBuilder.group({
             // siehe formControlName innerhalb von @Component({template: ...})
-            titel: this.titel,
-            art: this.art,
-            verlag: this.verlag,
+            nachname: this.nachname,
+            familienstand: this.familienstand,
+            geschlecht: this.geschlecht,
             rating: this.rating,
-            // datum: this.datum
+            // geburtsdatum: this.geburtsdatum
         })
     }
 
@@ -94,10 +94,10 @@ export default class UpdateStammdatenComponent implements OnInit {
             return
         }
 
-        // rating, preis und rabatt koennen im Formular nicht geaendert werden
+        // rating, umsatz und rabatt koennen im Formular nicht geaendert werden
         this.kunde.updateStammdaten(
-            this.titel.value, this.art.value, this.verlag.value,
-            this.rating.value, this.kunde.datum, this.kunde.preis,
+            this.nachname.value, this.familienstand.value, this.geschlecht.value,
+            this.rating.value, this.kunde.geburtsdatum, this.kunde.umsatz,
             this.kunde.rabatt)
         console.log('kunde=', this.kunde)
 

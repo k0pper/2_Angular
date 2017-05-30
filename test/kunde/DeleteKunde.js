@@ -29,9 +29,9 @@ export default {
         done()
     },
 
-    'Kunde mit Titel "Epsilon" loeschen'() {
+    'Kunde mit Nachname "Epsilon" loeschen'() {
         // Given
-        const titel = 'Epsilon'
+        const nachname = 'Epsilon'
         const {page} = this.client
 
         // When
@@ -45,12 +45,12 @@ export default {
         page.header().clickSuche()
 
         page.sucheKundenPage()
-            .titel(titel)
+            .nachname(nachname)
             .submit()
             .deleteKundeErsteZeile()
 
         // Then
-            .titel(titel)
+            .nachname(nachname)
             .submit()
             .checkFehlermeldung()
         page.authPage().logout().checkLogout()

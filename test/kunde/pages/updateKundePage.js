@@ -17,17 +17,17 @@
 
 // jshint expr:true
 
-const updateTitel = function(titelStr) {
+const updateNachname = function(nachnameStr) {
     const {expect, click, clearValue} = this
 
     // Workaround fuer Bootstrap
-    expect.element('@tabSchlagwoerter').to.be.visible
-    click('@tabSchlagwoerter')
+    expect.element('@tabInteresseType').to.be.visible
+    click('@tabInteresseType')
     expect.element('@tabStammdaten').to.be.visible
     click('@tabStammdaten')
 
-    expect.element('@titel').to.be.visible
-    clearValue('@titel').setValue('@titel', titelStr)
+    expect.element('@nachname').to.be.visible
+    clearValue('@nachname').setValue('@nachname', nachnameStr)
     expect.element('@updateStammdatenButton').to.be.visible
     return click('@updateStammdatenButton')
 }
@@ -39,11 +39,11 @@ export default {
         tabStammdaten: {
             selector: 'a[href="#stammdaten"]',
         },
-        tabSchlagwoerter: {
-            selector: 'a[href="#schlagwoerter"]',
+        tabInteresseType: {
+            selector: 'a[href="#interessen"]',
         },
-        titel: {
-            selector: 'input[id=titelInput]',
+        nachname: {
+            selector: 'input[id=nachnameInput]',
         },
         updateStammdatenButton: {
             selector: 'hs-update-stammdaten button',
@@ -51,6 +51,6 @@ export default {
     },
 
     commands: [{
-        updateTitel,
+        updateNachname,
     }],
 }

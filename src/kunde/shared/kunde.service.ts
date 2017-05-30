@@ -27,7 +27,7 @@ import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import {AuthService} from '../../auth/auth.service'
-import {BASE_URI, isBlank, isEmpty, isPresent, log, PATH_BUCH} from '../../shared'
+import {BASE_URI, isBlank, isEmpty, isPresent, log, PATH_KUNDE} from '../../shared'
 // Aus dem SharedModule als Singleton exportiert
 import DiagrammService from '../../shared/diagramm.service'
 import {Kunde, KundeForm, KundeServer} from './index'
@@ -67,7 +67,7 @@ export class KundeService {
             DiagrammService,
         @Inject(Http) private readonly http: Http,
         @Inject(AuthService) private readonly authService: AuthService) {
-        this.baseUriKunde = `${BASE_URI}${PATH_BUCH}`
+        this.baseUriKunde = `${BASE_URI}${PATH_KUNDE}`
         console.log(
             `KundeService.constructor(): baseUriKunde=${this.baseUriKunde}`)
     }
@@ -127,7 +127,7 @@ export class KundeService {
                 if (isBlank(body)) {
                     this.errorEmitter.emit(status)
                 } else {
-                    // z.B. [PARAMETER][findByTitel.titel][Bei einem ...][x]
+                    // z.B. [PARAMETER][findByNachname.nachname][Bei einem ...][x]
                     let errorMsg = body.split('[')[3]
                     errorMsg = errorMsg.substr(0, errorMsg.length - 2)
                     this.errorEmitter.emit(errorMsg)
@@ -194,7 +194,7 @@ export class KundeService {
     save(
         neuesKunde: Kunde, successFn: (location: string|undefined) => void,
         errorFn: (status: number, text: string) => void) {
-        neuesKunde.datum = moment(new Date())
+        neuesKunde.geburtsdatum = moment(new Date())
 
         const uri = this.baseUriKunde
         const body = JSON.stringify(neuesKunde.toJSON())
@@ -430,23 +430,23 @@ export class KundeService {
         URLSearchParams {
         const searchParams = new URLSearchParams()
 
-        if (!isEmpty(suchkriterien.titel)) {
-            searchParams.set('titel', suchkriterien.titel as string)
+        if (!isEmpty(suchkriterien.nachname)) {
+            searchParams.set('nachname', suchkriterien.nachname as string)
         }
-        if (isPresent(suchkriterien.art)) {
-            searchParams.set('art', suchkriterien.art as string)
+        if (isPresent(suchkriterien.familienstand)) {
+            searchParams.set('familienstand', suchkriterien.familienstand as string)
         }
         if (isPresent(suchkriterien.rating)) {
             searchParams.set('rating', suchkriterien.rating.toString())
         }
-        if (!isEmpty(suchkriterien.verlag)) {
-            searchParams.set('verlag', suchkriterien.verlag as string)
+        if (!isEmpty(suchkriterien.geschlecht)) {
+            searchParams.set('geschlecht', suchkriterien.geschlecht as string)
         }
-        if (isPresent(suchkriterien.javascript) && suchkriterien.javascript) {
-            searchParams.set('javascript', 'true')
+        if (isPresent(suchkriterien.sport) && suchkriterien.sport) {
+            searchParams.set('sport', 'true')
         }
-        if (isPresent(suchkriterien.typescript) && suchkriterien.typescript) {
-            searchParams.set('typescript', 'true')
+        if (isPresent(suchkriterien.lesen) && suchkriterien.lesen) {
+            searchParams.set('lesen', 'true')
         }
         return searchParams
     }

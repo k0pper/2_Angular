@@ -18,8 +18,8 @@
         *ngIf="kunde !== null">
     <tbody>
         <tr>
-            <td><label>Titel</label></td>
-            <td>{{kunde.titel}}</td>
+            <td><label>Nachname</label></td>
+            <td>{{kunde.nachname}}</td>
         </tr>
         <tr>
             <td><label>Bewertung</label></td>
@@ -33,34 +33,34 @@
         <tr>
             <td><label>Art</label></td>
             <td>
-                <span [ngSwitch]="kunde.art">
-                    <span *ngSwitchCase="'DRUCKAUSGABE'">Druckausgabe</span>
-                    <span *ngSwitchCase="'KINDLE'">Kindle</span>
+                <span [ngSwitch]="kunde.familienstand">
+                    <span *ngSwitchCase="'VH'">Druckausgabe</span>
+                    <span *ngSwitchCase="'L'">Kindle</span>
                     <span *ngSwitchDefault>unbekannt</span>
                 </span>
             </td>
         </tr>
         <tr>
-            <td><label>Verlag</label></td>
+            <td><label>GeschlechtType</label></td>
             <td>
-                <span [ngSwitch]="kunde.verlag">
-                    <span *ngSwitchCase="'IWI_VERLAG'">Iwi Verlag</span>
-                    <span *ngSwitchCase="'HSKA_VERLAG'">Hska Verlag</span>
+                <span [ngSwitch]="kunde.geschlecht">
+                    <span *ngSwitchCase="'M'">Iwi GeschlechtType</span>
+                    <span *ngSwitchCase="'W'">Hska GeschlechtType</span>
                     <span *ngSwitchDefault>unbekannt</span>
                 </span>
             </td>
         </tr>
         <tr>
-            <td><label>Datum</label></td>
+            <td><label>Geburtsdatum</label></td>
             <td>
                 {{kunde.datumFormatted}}<br/>
                 {{kunde.datumFromNow}}
             </td>
         </tr>
         <tr>
-            <td><label>Preis</label></td>
+            <td><label>Umsatz</label></td>
             <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
-            <td>{{kunde.preis | currency: 'EUR': true}}</td>
+            <td>{{kunde.umsatz | currency: 'EUR': true}}</td>
         </tr>
         <tr>
             <td><label>Rabatt</label></td>
@@ -74,10 +74,10 @@
             <td>{{kunde.email}}</td>
         </tr>
         <tr>
-            <td><label>Lieferbar?</label></td>
+            <td><label>Newsletter?</label></td>
             <td>
                 <div class="checkbox">
-                    <input type="checkbox" checked="{{kunde.lieferbar}}" disabled
+                    <input type="checkbox" checked="{{kunde.newsletter}}" disabled
                         class="checkbox">
                 </div>
             </td>
