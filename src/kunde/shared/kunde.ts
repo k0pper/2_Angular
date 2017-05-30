@@ -16,11 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-<<<<<<< HEAD
-=======
-/*Testkommentar von Yvonne*/
-// Testkommentar von Alina
->>>>>>> 1989ae0b1fd9465a9c89e64b06703e2902affaff
+
 
 import * as _ from 'lodash'
 import * as moment from 'moment'
