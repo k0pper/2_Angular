@@ -25,11 +25,11 @@ import {isBlank, isEmpty, isPresent} from '../../shared'
 
 moment.locale('de')
 
-const MIN_RATING = 0
-const MAX_RATING = 5
+// const MIN_RATING = 0
+// const MAX_RATING = 5
 
 export declare type GeschlechtType = 'M' | 'W'
-export declare type FamilienstandType = 'L' | 'VH'
+export declare type FamilienstandType = 'L' | 'VH' | 'G' | 'VW'
 
 /**
  * Gemeinsame Datenfelder unabh&auml;ngig, ob die Kundedaten von einem Server
