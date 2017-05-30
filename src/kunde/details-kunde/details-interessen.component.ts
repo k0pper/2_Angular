@@ -17,7 +17,7 @@
 
 import {Component, Input, OnInit} from '@angular/core'
 
-import {log} from '../../shared'
+import {log} from '../../shared' // Das ist ein Test
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-interessen</code>
