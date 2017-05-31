@@ -30,8 +30,9 @@ import {log} from '../../shared' // Das ist ein Test
                 <div class="checkbox">
                     <label [ngSwitch]="interesse">
                         <input type="checkbox" checked disabled class="checkbox">
-                        <span *ngSwitchCase="'S'">JavaScript</span>
-                        <span *ngSwitchCase="'L'">TypeScript</span>
+                        <span *ngSwitchCase="'S'">Sport</span>
+                        <span *ngSwitchCase="'L'">Lesen</span>
+                        <span *ngSwitchCase="'R'">Reisen</span>
                     </label>
                 <div>
             </div>
