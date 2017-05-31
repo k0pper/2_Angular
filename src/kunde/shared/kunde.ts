@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
 import * as moment from 'moment'
 import 'moment/locale/de'
 
@@ -57,7 +57,7 @@ export interface KundeShared {
  * </ul>
  */
 export interface KundeServer extends KundeShared {
-    rating: number|undefined
+    // rating: number|undefined
     interessen?: Array<string>|undefined
 }
 
@@ -69,7 +69,7 @@ export interface KundeServer extends KundeShared {
  * </ul>
  */
 export interface KundeForm extends KundeShared {
-    rating: string
+    // rating: string
     sport?: boolean
     lesen?: boolean
 }
@@ -79,7 +79,7 @@ export interface KundeForm extends KundeShared {
  * Functions fuer Abfragen und Aenderungen.
  */
 export class Kunde {
-    public ratingArray: Array<boolean> = []
+    // public ratingArray: Array<boolean> = []
 
     /**
      * Ein Kunde-Objekt mit JSON-Daten erzeugen, die von einem RESTful Web
@@ -94,7 +94,7 @@ export class Kunde {
             geburtsdatum = moment(tmp)
         }
         const kunde = new Kunde(
-            kundeServer._id, kundeServer.nachname, kundeServer.rating, kundeServer.familienstand,
+            kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
             kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, kundeServer.rabatt,
             kundeServer.newsletter, kundeServer.interessen, kundeServer.email)
         console.log('Kunde.fromServer(): kunde=', kunde)
@@ -121,7 +121,7 @@ export class Kunde {
 
         const rabatt = kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
         const kunde = new Kunde(
-            kundeForm._id, kundeForm.nachname, +kundeForm.rating, kundeForm.familienstand,
+            kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
             kundeForm.geschlecht, datumMoment, kundeForm.umsatz, rabatt,
             kundeForm.newsletter, interessen, kundeForm.email)
         console.log('Kunde.fromForm(): kunde=', kunde)
@@ -166,20 +166,20 @@ export class Kunde {
     /**
      * Die Bewertung ("rating") des Kundees um 1 erh&ouml;hen
      */
-    rateUp() {
-        if (this.rating !== undefined && this.rating < MAX_RATING) {
-            this.rating++
-        }
-    }
+    // rateUp() {
+    //     if (this.rating !== undefined && this.rating < MAX_RATING) {
+    //         this.rating++
+    //     }
+    // }
 
     /**
      * Die Bewertung ("rating") des Kundees um 1 erniedrigen
      */
-    rateDown() {
-        if (this.rating !== undefined && this.rating > MIN_RATING) {
-            this.rating--
-        }
-    }
+    // rateDown() {
+    //     if (this.rating !== undefined && this.rating > MIN_RATING) {
+    //         this.rating--
+    //     }
+    // }
 
     /**
      * Abfrage, ob das Kunde dem angegebenen GeschlechtType zugeordnet ist.
@@ -193,22 +193,21 @@ export class Kunde {
     /**
      * Aktualisierung der Stammdaten des Kunde-Objekts.
      * @param nachname Der neue Kundenachname
-     * @param rating Die neue Bewertung
      * @param familienstand Die neue Kundeart (VH oder L)
      * @param geschlecht Der neue GeschlechtType
      * @param umsatz Der neue Umsatz
      * @param rabatt Der neue Rabatt
      */
     updateStammdaten(
-        nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType, rating: number,
+        nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType/*, rating: number*/,
         geburtsdatum: moment.Moment|undefined, umsatz: number|undefined,
         rabatt: number|undefined) {
         this.nachname = nachname
         this.familienstand = familienstand
         this.geschlecht = geschlecht
-        this.rating = rating
-        this.ratingArray = []
-        _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
+        // this.rating = rating
+        // this.ratingArray = []
+        // _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
         this.geburtsdatum = geburtsdatum
         this.umsatz = umsatz
         this.rabatt = rabatt
@@ -266,7 +265,7 @@ export class Kunde {
         return {
             _id: this._id,
             nachname: this.nachname,
-            rating: this.rating,
+            // rating: this.rating,
             familienstand: this.familienstand,
             geschlecht: this.geschlecht,
             geburtsdatum,
@@ -286,7 +285,8 @@ export class Kunde {
     private constructor(
         // tslint:disable-next-line:variable-name
         public _id: string|undefined, public nachname: string|undefined,
-        public rating: number|undefined, public familienstand: FamilienstandType|undefined,
+        /*public rating: number|undefined,*/
+        public familienstand: FamilienstandType|undefined,
         public geschlecht: GeschlechtType|undefined, public geburtsdatum: moment.Moment|undefined,
         public umsatz: number|undefined, public rabatt: number|undefined,
         public newsletter: boolean|undefined,
@@ -294,7 +294,7 @@ export class Kunde {
         public email: string|undefined) {
         this._id = _id || undefined
         this.nachname = nachname || undefined
-        this.rating = rating || undefined
+        // this.rating = rating || undefined
         this.familienstand = familienstand || undefined
         this.geschlecht = geschlecht || undefined
         this.geburtsdatum =
@@ -309,10 +309,10 @@ export class Kunde {
             const tmpInteresseType = interessen as Array<string>
             this.interessen = tmpInteresseType
         }
-        if (rating !== undefined) {
-            _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
-            _.times(MAX_RATING - rating, () => this.ratingArray.push(false))
-        }
+        // if (rating !== undefined) {
+        //     _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
+        //     _.times(MAX_RATING - rating, () => this.ratingArray.push(false))
+        // }
         this.email = email || undefined
     }
 

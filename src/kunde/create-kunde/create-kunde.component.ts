@@ -48,7 +48,7 @@ export default class CreateKundeComponent implements OnInit {
         Validators.required, Validators.minLength(2),
         Validators.pattern(/^\w.*$/),
     ]))
-    readonly rating: FormControl = new FormControl(null)
+    // readonly rating: FormControl = new FormControl(null)
     readonly familienstand: FormControl = new FormControl('VH')
     readonly geschlecht: FormControl = new FormControl(null)
     readonly umsatz: FormControl = new FormControl(null)
@@ -81,7 +81,7 @@ export default class CreateKundeComponent implements OnInit {
         this.form = this.formBuilder.group({
             // siehe formControlName innerhalb @Component({template: ...})
             nachname: this.nachname,
-            rating: this.rating,
+            // rating: this.rating,
             familienstand: this.familienstand,
             geschlecht: this.geschlecht,
             umsatz: this.umsatz,

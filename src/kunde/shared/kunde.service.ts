@@ -22,8 +22,8 @@ import {EventEmitter, Inject, Injectable} from '@angular/core'
 // HttpModule enthaelt nur Services, keine Komponenten
 import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http'
 
-import {ChartConfiguration, ChartDataSets} from 'chart.js'
-import * as _ from 'lodash'
+import {ChartConfiguration/*, ChartDataSets*/} from 'chart.js'
+// import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import {AuthService} from '../../auth/auth.service'
@@ -322,14 +322,14 @@ export class KundeService {
             const labels =
                 kunden.map(kunde => kunde._id) as Array<string>
             console.log('KundeService.createBarChart(): labels: ', labels)
-            const ratingData =
-                kunden.map(kunde => kunde.rating) as Array<number>
+            // const ratingData =
+            //     kunden.map(kunde => kunde.rating) as Array<number>
 
-            const datasets: Array<ChartDataSets> =
-                [{label: 'Bewertung', data: ratingData}]
+            // const datasets: Array<ChartDataSets> =
+            //     [{label: 'Bewertung', data: ratingData}]
             const config: ChartConfiguration = {
                 type: 'bar',
-                data: {labels, datasets},
+                data: {labels/*,datasets*/},
             }
             this.diagrammService.createChart(chartElement, config)
         }
@@ -354,15 +354,15 @@ export class KundeService {
             const kunden = this.responseToArrayKunde(response)
             const labels =
                 kunden.map(kunde => kunde._id) as Array<string>
-            const ratingData =
-                kunden.map(kunde => kunde.rating) as Array<number>
+            // const ratingData =
+            //     kunden.map(kunde => kunde.rating) as Array<number>
 
-            const datasets: Array<ChartDataSets> =
-                [{label: 'Bewertung', data: ratingData}]
+            // const datasets: Array<ChartDataSets> =
+            //     [{label: 'Bewertung', data: ratingData}]
 
             const config: ChartConfiguration = {
                 type: 'line',
-                data: {labels, datasets},
+                data: {labels/*, datasets*/},
             }
 
             this.diagrammService.createChart(chartElement, config)
@@ -388,26 +388,26 @@ export class KundeService {
             const kunden = this.responseToArrayKunde(response)
             const labels =
                 kunden.map(kunde => kunde._id) as Array<string>
-            const ratingData =
-                kunden.map(kunde => kunde.rating) as Array<number>
+            // const ratingData =
+            //     kunden.map(kunde => kunde.rating) as Array<number>
 
-            const backgroundColor =
-                new Array<string>(ratingData.length)
-            const hoverBackgroundColor =
-                new Array<string>(ratingData.length)
-            _.times(ratingData.length, i => {
-                backgroundColor[i] = this.diagrammService.getBackgroundColor(i)
-                hoverBackgroundColor[i] =
-                    this.diagrammService.getHoverBackgroundColor(i)
-            })
+            // const backgroundColor =
+            //     new Array<string>(ratingData.length)
+            // const hoverBackgroundColor =
+            //     new Array<string>(ratingData.length)
+            // _.times(ratingData.length, i => {
+            //     backgroundColor[i] = this.diagrammService.getBackgroundColor(i)
+            //     hoverBackgroundColor[i] =
+            //         this.diagrammService.getHoverBackgroundColor(i)
+            // })
 
             const data: any = {
                 labels,
-                datasets: [{
-                    data: ratingData,
-                    backgroundColor,
-                    hoverBackgroundColor,
-                }],
+                // datasets: [{
+                //     data: ratingData,
+                //     backgroundColor,
+                //     hoverBackgroundColor,
+                // }],
             }
 
             const config: ChartConfiguration = {type: 'pie', data}
@@ -436,9 +436,9 @@ export class KundeService {
         if (isPresent(suchkriterien.familienstand)) {
             searchParams.set('familienstand', suchkriterien.familienstand as string)
         }
-        if (isPresent(suchkriterien.rating)) {
-            searchParams.set('rating', suchkriterien.rating.toString())
-        }
+        // if (isPresent(suchkriterien.rating)) {
+        //     searchParams.set('rating', suchkriterien.rating.toString())
+        // }
         if (!isEmpty(suchkriterien.geschlecht)) {
             searchParams.set('geschlecht', suchkriterien.geschlecht as string)
         }
