@@ -20,7 +20,7 @@ import {animate, Component, Input, OnInit, state, style, transition, trigger} fr
 // Bereitgestellt durch das RouterModule (s. Re-Export im SharedModule)
 import {Router} from '@angular/router'
 
-import {DETAILS_BUCH_PATH} from '../../app/root.routing'
+import {DETAILS_KUNDE_PATH} from '../../app/root.routing'
 import {AuthService} from '../../auth/auth.service'
 import {isString, log} from '../../shared'
 import {Kunde} from '../shared'
@@ -103,7 +103,7 @@ export default class SuchergebnisComponent implements OnInit {
      */
     @log
     onSelect(kunde: Kunde) {
-        const path = `/${DETAILS_BUCH_PATH}/${kunde._id}`
+        const path = `/${DETAILS_KUNDE_PATH}/${kunde._id}`
         console.log(`path=${path}`)
         this.router.navigate([path])
     }
