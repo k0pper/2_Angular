@@ -31,11 +31,13 @@
             </td>
         </tr>-->
         <tr>
-            <td><label>Art</label></td>
+            <td><label>Familienstand</label></td>
             <td>
                 <span [ngSwitch]="kunde.familienstand">
-                    <span *ngSwitchCase="'VH'">Druckausgabe</span>
-                    <span *ngSwitchCase="'L'">Kindle</span>
+                    <span *ngSwitchCase="'VH'">Verheiratet</span>
+                    <span *ngSwitchCase="'L'">Lesen</span>
+                    <span *ngSwitchCase="'G'">Geschieden</span>
+                    <span *ngSwitchCase="'VW'">Verwitwet</span>
                     <span *ngSwitchDefault>unbekannt</span>
                 </span>
             </td>
@@ -44,8 +46,8 @@
             <td><label>GeschlechtType</label></td>
             <td>
                 <span [ngSwitch]="kunde.geschlecht">
-                    <span *ngSwitchCase="'M'">Iwi GeschlechtType</span>
-                    <span *ngSwitchCase="'W'">Hska GeschlechtType</span>
+                    <span *ngSwitchCase="'M'">Maennlich</span>
+                    <span *ngSwitchCase="'W'">Weiblich</span>
                     <span *ngSwitchDefault>unbekannt</span>
                 </span>
             </td>
@@ -62,19 +64,16 @@
             <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
             <td>{{kunde.umsatz | currency: 'EUR': true}}</td>
         </tr>
-        <tr>
+        <!--<tr>
             <td><label>Rabatt</label></td>
-            <!-- {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits} -->
-            <!-- default: 1.0-3 -->
-            <!-- siehe number_pipe.ts -->
             <td>{{kunde.rabatt | percent: '.2'}}</td>
-        </tr>
+        </tr>-->
         <tr>
             <td><label>Email</label></td>
             <td>{{kunde.email}}</td>
         </tr>
         <tr>
-            <td><label>Newsletter?</label></td>
+            <td><label>Newsletter abonnieren?</label></td>
             <td>
                 <div class="checkbox">
                     <input type="checkbox" checked="{{kunde.newsletter}}" disabled
