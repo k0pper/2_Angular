@@ -98,7 +98,7 @@ export default class UpdateStammdatenComponent implements OnInit {
         this.kunde.updateStammdaten(
             this.nachname.value, this.familienstand.value, this.geschlecht.value,
             /*this.rating.value,*/ this.kunde.geburtsdatum, this.kunde.umsatz,
-            this.kunde.rabatt)
+            /*this.kunde.rabatt*/)
         console.log('kunde=', this.kunde)
 
         const successFn = () => {

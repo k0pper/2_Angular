@@ -57,7 +57,7 @@
                         formControlName="nachname">
                     <div class="fa fa-exclamation-circle form-control-feedback"
                         *ngIf="!nachname.valid && nachname.touched">
-                        Ein Kundenachname muss mit einem Buchstaben oder einer
+                        Ein Nachname muss mit einem Buchstaben oder einer
                         Ziffer beginnen und mindestens 2 Zeichen lang sein.
                     </div>
                 </div>
@@ -84,18 +84,30 @@
             </div>-->
 
             <div class="form-group row">
-                <label class="col col-2 form-control-label">Art *</label>
+                <label class="col col-2 form-control-label">Familienstand *</label>
                 <div class="col col-10">
                     <div class="radio">
                         <label class="radio-inline">
                             <input type="radio" formControlName="familienstand"
-                                   name="familienstand" value="VH"> Druckausgabe
+                                   name="familienstand" value="VH"> Verheiratet
                         </label>
                     </div>
                     <div class="radio">
                         <label class="radio-inline">
                             <input type="radio" formControlName="familienstand"
-                                   name="familienstand" value="L"> Kindle
+                                   name="familienstand" value="L"> Ledig
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" formControlName="familienstand"
+                                   name="familienstand" value="G"> Geschieden
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" formControlName="familienstand"
+                                   name="familienstand" value="VW"> Verwitwet
                         </label>
                     </div>
                 </div>
@@ -141,7 +153,7 @@
                 </div>
             </div>
 
-            <div class="form-group row"
+            <!--<div class="form-group row"
                 [class.has-danger]="!rabatt.valid && rabatt.touched">
                 <label for="rabattInput" class="col col-2 form-control-label">
                     Rabatt *
@@ -161,7 +173,7 @@
                         Ein Rabatt muss in Prozent eingegeben werden, z.B. 5.67
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="form-group row">
                 <label for="datumInput" class="col col-2 form-control-label">

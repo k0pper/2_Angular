@@ -41,7 +41,7 @@ export interface KundeShared {
     geschlecht?: GeschlechtType|undefined
     familienstand: FamilienstandType|undefined
     umsatz: number|undefined
-    rabatt: number|undefined
+    // rabatt: number|undefined
     geburtsdatum: string|undefined
     newsletter: boolean|undefined
     email: string|undefined
@@ -95,7 +95,7 @@ export class Kunde {
         }
         const kunde = new Kunde(
             kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
-            kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, kundeServer.rabatt,
+            kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, /*kundeServer.rabatt,*/
             kundeServer.newsletter, kundeServer.interessen, kundeServer.email)
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
@@ -119,10 +119,10 @@ export class Kunde {
             undefined :
             moment(kundeForm.geburtsdatum as string)
 
-        const rabatt = kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
+        // const rabatt = kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
         const kunde = new Kunde(
             kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
-            kundeForm.geschlecht, datumMoment, kundeForm.umsatz, rabatt,
+            kundeForm.geschlecht, datumMoment, kundeForm.umsatz, /*rabatt,*/
             kundeForm.newsletter, interessen, kundeForm.email)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
@@ -196,12 +196,11 @@ export class Kunde {
      * @param familienstand Die neue Kundeart (VH oder L)
      * @param geschlecht Der neue GeschlechtType
      * @param umsatz Der neue Umsatz
-     * @param rabatt Der neue Rabatt
      */
     updateStammdaten(
         nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType/*, rating: number*/,
         geburtsdatum: moment.Moment|undefined, umsatz: number|undefined,
-        rabatt: number|undefined) {
+        /*rabatt: number|undefined*/) {
         this.nachname = nachname
         this.familienstand = familienstand
         this.geschlecht = geschlecht
@@ -210,7 +209,7 @@ export class Kunde {
         // _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
         this.geburtsdatum = geburtsdatum
         this.umsatz = umsatz
-        this.rabatt = rabatt
+        // this.rabatt = rabatt
     }
 
     /**
@@ -270,7 +269,7 @@ export class Kunde {
             geschlecht: this.geschlecht,
             geburtsdatum,
             umsatz: this.umsatz,
-            rabatt: this.rabatt,
+            // rabatt: this.rabatt,
             newsletter: this.newsletter,
             interessen: this.interessen,
             email: this.email,
@@ -288,7 +287,7 @@ export class Kunde {
         /*public rating: number|undefined,*/
         public familienstand: FamilienstandType|undefined,
         public geschlecht: GeschlechtType|undefined, public geburtsdatum: moment.Moment|undefined,
-        public umsatz: number|undefined, public rabatt: number|undefined,
+        public umsatz: number|undefined, /*public rabatt: number|undefined,*/
         public newsletter: boolean|undefined,
         public interessen: Array<string>|undefined,
         public email: string|undefined) {
@@ -300,7 +299,7 @@ export class Kunde {
         this.geburtsdatum =
             isPresent(geburtsdatum) ? geburtsdatum : moment(new Date().toISOString())
         this.umsatz = umsatz || undefined
-        this.rabatt = rabatt || undefined
+        // this.rabatt = rabatt || undefined
         this.newsletter = newsletter || undefined
 
         if (isBlank(interessen)) {

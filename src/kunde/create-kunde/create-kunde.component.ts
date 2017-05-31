@@ -52,7 +52,7 @@ export default class CreateKundeComponent implements OnInit {
     readonly familienstand: FormControl = new FormControl('VH')
     readonly geschlecht: FormControl = new FormControl(null)
     readonly umsatz: FormControl = new FormControl(null)
-    readonly rabatt: FormControl = new FormControl(null)
+    // readonly rabatt: FormControl = new FormControl(null)
     readonly geburtsdatum: FormControl = new FormControl(null)
     readonly newsletter: FormControl = new FormControl(false)
     readonly sport: FormControl = new FormControl(false)
@@ -85,7 +85,7 @@ export default class CreateKundeComponent implements OnInit {
             familienstand: this.familienstand,
             geschlecht: this.geschlecht,
             umsatz: this.umsatz,
-            rabatt: this.rabatt,
+            // rabatt: this.rabatt,
             geburtsdatum: this.geburtsdatum,
             newsletter: this.newsletter,
             sport: this.sport,
