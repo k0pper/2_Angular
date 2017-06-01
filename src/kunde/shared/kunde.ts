@@ -45,6 +45,7 @@ export interface KundeShared {
     geburtsdatum: string|undefined
     newsletter: boolean|undefined
     email: string|undefined
+    homepage: string|undefined
 }
 
 /**
@@ -97,7 +98,7 @@ export class Kunde {
         const kunde = new Kunde(
             kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
             kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, /*kundeServer.rabatt,*/
-            kundeServer.newsletter, kundeServer.interessen, kundeServer.email)
+            kundeServer.newsletter, kundeServer.interessen, kundeServer.email, kundeServer.homepage)
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
     }
@@ -127,7 +128,7 @@ export class Kunde {
         const kunde = new Kunde(
             kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
             kundeForm.geschlecht, datumMoment, kundeForm.umsatz, /*rabatt,*/
-            kundeForm.newsletter, interessen, kundeForm.email)
+            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
     }
@@ -281,6 +282,7 @@ export class Kunde {
             newsletter: this.newsletter,
             interessen: this.interessen,
             email: this.email,
+            homepage: this.homepage,
         }
     }
 
@@ -298,7 +300,8 @@ export class Kunde {
         public umsatz: number|undefined, /*public rabatt: number|undefined,*/
         public newsletter: boolean|undefined,
         public interessen: Array<string>|undefined,
-        public email: string|undefined) {
+        public email: string|undefined,
+        public homepage: string|undefined) {
         this._id = _id || undefined
         this.nachname = nachname || undefined
         // this.rating = rating || undefined
@@ -321,6 +324,7 @@ export class Kunde {
         //     _.times(MAX_RATING - rating, () => this.ratingArray.push(false))
         // }
         this.email = email || undefined
+        this.homepage = homepage || undefined
     }
 
     private resetInteresseType() {

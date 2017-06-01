@@ -47,4 +47,18 @@ export class KundeValidator {
             === null
         return invalid ? {invalidEmail: true} : null
     }
+
+    static homepage(control: AbstractControl): {[key: string]: boolean}|null {
+        const {value} = control
+        if (isBlank(value)) {
+            return null
+        }
+
+        // tslint:disable:max-line-length
+        const invalid =
+            value.match(
+                /@^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$@i/)
+            === null
+        return invalid ? {invalidEmail: true} : null
+    }
 }

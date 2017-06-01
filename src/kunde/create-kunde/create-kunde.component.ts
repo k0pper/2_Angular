@@ -60,6 +60,8 @@ export default class CreateKundeComponent implements OnInit {
     readonly reisen: FormControl = new FormControl(false)
     readonly email: FormControl =
         new FormControl(null, [Validators.required, KundeValidator.email] as any)
+    readonly homepage: FormControl =
+        new FormControl(null, [Validators.required, KundeValidator.homepage] as any)
 
     showWarning = false
     fertig = false
@@ -93,6 +95,7 @@ export default class CreateKundeComponent implements OnInit {
             lesen: this.lesen,
             reisen: this.reisen,
             email: this.email,
+            homepage: this.homepage,
         })
 
         this.titleService.setTitle('Neues Kunde')
