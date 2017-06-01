@@ -448,6 +448,9 @@ export class KundeService {
         if (isPresent(suchkriterien.lesen) && suchkriterien.lesen) {
             searchParams.set('lesen', 'true')
         }
+        if (isPresent(suchkriterien.reisen) && suchkriterien.reisen) {
+            searchParams.set('reisen', 'true')
+        }
         return searchParams
     }
 

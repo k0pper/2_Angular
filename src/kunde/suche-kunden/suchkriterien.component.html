@@ -64,29 +64,41 @@
             </div>
 
             <div class="form-group row">
-                <label class="col col-2 form-control-label">GeschlechtType</label>
+                <label class="col col-2 form-control-label">Geschlecht</label>
                 <div class="col col-10">
                     <select class="form-control" [(ngModel)]="geschlecht" name="geschlecht">
                         <option value=""></option>
-                        <option value="M">Iwi GeschlechtType</option>
-                        <option value="W">Hska GeschlechtType</option>
+                        <option value="M">Maennlich</option>
+                        <option value="W">Weiblich</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col col-2 form-control-label">Art</label>
+                <label class="col col-2 form-control-label">Familienstand</label>
                 <div class="col col-10">
                     <div class="radio">
                         <label class="radio-inline">
                             <input type="radio" [(ngModel)]="familienstand" name="familienstand" value="VH">
-                            Druckausgabe
+                            Verheiratet
                         </label>
                     </div>
                     <div class="radio">
                         <label class="radio-inline">
                             <input type="radio" [(ngModel)]="familienstand" name="familienstand" value="L">
-                            Kindle
+                            Ledig
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" [(ngModel)]="familienstand" name="familienstand" value="G">
+                            Geschieden
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" [(ngModel)]="familienstand" name="familienstand" value="VW">
+                            Verwitwet
                         </label>
                     </div>
                 </div>
@@ -94,19 +106,25 @@
 
             <div class="form-group row">
                 <label for="interessenInput" class="col col-2 form-control-label">
-                    Schlagw&ouml;rter
+                    Interessen
                 </label>
                 <div class="col col-10">
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" [(ngModel)]="sport" name="sport"/>
-                            JavaScript
+                            Sport
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" [(ngModel)]="lesen" name="lesen"/>
-                            TypeScript
+                            Lesen
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="reisen" name="reisen"/>
+                            Reisen
                         </label>
                     </div>
                 </div>

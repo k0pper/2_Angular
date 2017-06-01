@@ -34,6 +34,7 @@ export default class SuchkriterienComponent {
     familienstand: FamilienstandType|null = null
     sport = false
     lesen = false
+    reisen = false
 
     // Event Binding: <hs-suchkriterien (waiting)="...">
     // Observables = Event-Streaming mit Promises
@@ -59,6 +60,7 @@ export default class SuchkriterienComponent {
             familienstand: this.familienstand,
             sport: this.sport,
             lesen: this.lesen,
+            reisen: this.reisen,
         }
         console.log('suchkriterien=', suchkriterien)
 

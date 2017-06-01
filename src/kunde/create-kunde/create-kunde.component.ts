@@ -57,6 +57,7 @@ export default class CreateKundeComponent implements OnInit {
     readonly newsletter: FormControl = new FormControl(false)
     readonly sport: FormControl = new FormControl(false)
     readonly lesen: FormControl = new FormControl(false)
+    readonly reisen: FormControl = new FormControl(false)
     readonly email: FormControl =
         new FormControl(null, [Validators.required, KundeValidator.email] as any)
 
@@ -90,6 +91,7 @@ export default class CreateKundeComponent implements OnInit {
             newsletter: this.newsletter,
             sport: this.sport,
             lesen: this.lesen,
+            reisen: this.reisen,
             email: this.email,
         })
 

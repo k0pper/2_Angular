@@ -38,6 +38,7 @@ export default class UpdateInteresseTypeComponent implements OnInit {
     form: FormGroup
     sport: FormControl
     lesen: FormControl
+    reisen: FormControl
 
     constructor(
         private readonly formBuilder: FormBuilder,
@@ -55,15 +56,18 @@ export default class UpdateInteresseTypeComponent implements OnInit {
         console.log('kunde=', this.kunde)
 
         // Definition und Vorbelegung der Eingabedaten (hier: Checkbox)
-        const hasJavaScript = this.kunde.hasInteresse('S')
-        this.sport = new FormControl(hasJavaScript)
-        const hasTypeScript = this.kunde.hasInteresse('L')
-        this.lesen = new FormControl(hasTypeScript)
+        const hasSport = this.kunde.hasInteresse('S')
+        this.sport = new FormControl(hasSport)
+        const hasLesen = this.kunde.hasInteresse('L')
+        this.lesen = new FormControl(hasLesen)
+        const hasReisen = this.kunde.hasInteresse('R')
+        this.reisen = new FormControl(hasReisen)
 
         this.form = this.formBuilder.group({
             // siehe ngFormControl innerhalb von @Component({template: `...`})
             sport: this.sport,
             lesen: this.lesen,
+            reisen: this.reisen,
         })
     }
 
@@ -86,7 +90,7 @@ export default class UpdateInteresseTypeComponent implements OnInit {
         }
 
         this.kunde.updateInteresseType(
-            this.sport.value, this.lesen.value)
+            this.sport.value, this.lesen.value, this.reisen.value)
         console.log('kunde=', this.kunde)
 
         const successFn = () => {

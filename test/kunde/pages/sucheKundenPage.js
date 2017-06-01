@@ -45,6 +45,10 @@ const lesen = function() {
     this.expect.element('@lesen').to.be.visible
     return this.click('@lesen')
 }
+const reisen = function() {
+    this.expect.element('@reisen').to.be.visible
+    return this.click('@reisen')
+}
 const submit = function() {
     this.expect.element('@button').to.be.visible
     return this.click('@button')
@@ -109,17 +113,26 @@ export default {
         geschlecht: {
             selector: 'select[name=geschlecht]',
         },
-        druckausgabe: {
+        verheiratet: {
             selector: 'input[value=VH]',
         },
-        kindle: {
+        ledig: {
             selector: 'input[value=L]',
+        },
+        geschieden: {
+            selector: 'input[value=G]',
+        },
+        verwitwet: {
+            selector: 'input[value=VW]',
         },
         sport: {
             selector: 'input[name=sport]',
         },
         lesen: {
             selector: 'input[name=lesen]',
+        },
+        reisen: {
+            selector: 'input[name=reisen]',
         },
         button: {
             selector: 'button i[class="fa fa-search"]',
@@ -142,10 +155,11 @@ export default {
 
     commands: [{
         nachname,
-        druckausgabe,
-        kindle,
+        verheiratet,
+        ledig,
         sport,
         lesen,
+        reisen,
         submit,
         checkAlleKunden,
         checkGefundeneKunden,

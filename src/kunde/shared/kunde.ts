@@ -72,6 +72,7 @@ export interface KundeForm extends KundeShared {
     // rating: string
     sport?: boolean
     lesen?: boolean
+    reisen?: boolean
 }
 
 /**
@@ -113,6 +114,9 @@ export class Kunde {
         }
         if (kundeForm.lesen) {
             interessen.push('L')
+        }
+        if (kundeForm.reisen) {
+            interessen.push('R')
         }
 
         const datumMoment = isEmpty(kundeForm.geburtsdatum) ?
@@ -193,7 +197,7 @@ export class Kunde {
     /**
      * Aktualisierung der Stammdaten des Kunde-Objekts.
      * @param nachname Der neue Kundenachname
-     * @param familienstand Die neue Kundeart (VH oder L)
+     * @param familienstand Der neue Familienstand (VH, L, G oder VW)
      * @param geschlecht Der neue GeschlechtType
      * @param umsatz Der neue Umsatz
      */
@@ -241,14 +245,18 @@ export class Kunde {
      * Aktualisierung der Schlagw&ouml;rter des Kunde-Objekts.
      * @param sport ist das Interesse S gesetzt
      * @param lesen ist das Interesse L gesetzt
+     * @param reisen ist das Interesse R gesetzt
      */
-    updateInteresseType(sport: boolean, lesen: boolean) {
+    updateInteresseType(sport: boolean, lesen: boolean, reisen: boolean) {
         this.resetInteresseType()
         if (sport) {
             this.addInteresse('S')
         }
         if (lesen) {
             this.addInteresse('L')
+        }
+        if (reisen) {
+            this.addInteresse('R')
         }
     }
 
