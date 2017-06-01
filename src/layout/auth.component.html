@@ -19,12 +19,12 @@
     <form (submit)="onLogin()" role="form">
         <div class="form-group row">
             <label for="usernameInput"
-                class="col col-8 form-control-label text-sm-right">
+                class="col col-5 form-control-label text-md-right">
                 <small>Benutzername</small>
             </label>
             <div class="col col-3">
                 <input id="usernameInput" type="search"
-                    class="form-control form-control-sm"
+                    class="form-control form-control-md"
                     tabindex="1" autocomplete="off"
                     required [(ngModel)]="username" name="username">
             </div>
@@ -37,7 +37,7 @@
 
         <div class="form-group row">
             <label for="passwordInput"
-                class="col col-8 form-control-label text-sm-right">
+                class="col col-5 form-control-label text-md-right">
                 <small>Passwort</small>
             </label>
             <div class="col col-3">

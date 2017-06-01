@@ -23,7 +23,7 @@ import {log} from '../shared'
 @Component({
     selector: 'hs-home',
     template: `
-        <h1 class="display-1">Willkommen in der Kundenverwaltung!</h1>
+        <h1 class="display-1">Kunednverwaltung</h1>
     `,
 })
 export default class HomeComponent implements OnInit {

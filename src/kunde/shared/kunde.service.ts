@@ -46,7 +46,7 @@ import {Kunde, KundeForm, KundeServer} from './index'
 // Die Anwendungslogik wird vom Controller an Service-Klassen delegiert.
 
 /**
- * Die Service-Klasse zu B&uuml;cher.
+ * Die Service-Klasse zu Kunde.
  */
 @Injectable()
 export class KundeService {

@@ -47,7 +47,7 @@ export default class SuchkriterienComponent {
     }
 
     /**
-     * Suche nach B&uuml;chern, die den spezfizierten Suchkriterien entsprechen
+     * Suche nach Kunden, die den spezfizierten Suchkriterien entsprechen
      * @param suchkriterien: Suchkriterien vom Typ IKundeForm
      * @return false, um das durch den Button-Klick ausgel&ouml;ste Ereignis
      *         zu konsumieren.

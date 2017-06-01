@@ -57,7 +57,7 @@ export class KundeValidator {
         // tslint:disable:max-line-length
         const invalid =
             value.match(
-                /@^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$@i/)
+                /.*/)
             === null
         return invalid ? {invalidEmail: true} : null
     }

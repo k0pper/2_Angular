@@ -49,6 +49,7 @@ export default class AuthComponent implements OnInit {
 
     @log
     onLogin() {
+        console.warn('auth.component.ts TRIES TO LOG IN')
         this.authService.login(this.username, this.password)
     }
 

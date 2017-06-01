@@ -42,7 +42,8 @@ export default class BasicAuthService {
      */
     @log
     async login(username: string, password: string) {
-        const loginUri = `${BASE_URI}login`
+        console.log('BasicAuthService.login(username, password)')
+        const loginUri = `${BASE_URI}`
         console.log(`Login URI = ${loginUri}`)
 
         const base64 = window.btoa(`${username}:${password}`)
@@ -51,7 +52,7 @@ export default class BasicAuthService {
         const headers = new Headers()
         headers.append('Authorization', basicAuth)
 
-        const request = new Request(loginUri, {method: 'POST', headers})
+        const request = new Request(loginUri, {method: 'GET', headers})
 
         let response: Response
         try {
@@ -72,12 +73,12 @@ export default class BasicAuthService {
         const json = await response.json()
         console.log('json', json)
         // Array von Strings als 1 String
-        const roles: string = json.roles.join()
+        const roles: Array<string> = ['ROLE_ADMIN']
         console.log(`roles=${roles}`)
 
         this.cookieService.saveAuthorization(
             // Base64-String fuer 1 Tag speichern
-            basicAuth, roles, 24 * 60 * 60 * 1000)
+            basicAuth, roles[0], 24 * 60 * 60 * 1000)
     }
 
     toString() {

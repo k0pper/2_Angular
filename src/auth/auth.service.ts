@@ -18,8 +18,9 @@
 import {EventEmitter, Inject, Injectable} from '@angular/core'
 
 import {isPresent, log} from '../shared'
+import BasicAuthService from './basic-auth.service'
 import CookieService from './cookie.service'
-import JwtService from './jwt.service'
+// import JwtService from './jwt.service'
 
 export const ROLLE_ADMIN = 'admin'
 
@@ -31,7 +32,8 @@ export class AuthService {
         new EventEmitter<Array<string>>()
 
     constructor(
-        @Inject(JwtService) private readonly jwtService: JwtService,
+        // @Inject(JwtService) private readonly jwtService: JwtService,
+        @Inject(BasicAuthService) private readonly basicAuthService: BasicAuthService,
         @Inject(CookieService) private readonly cookieService: CookieService) {
         console.log('AuthService.constructor()')
     }
@@ -43,10 +45,12 @@ export class AuthService {
      */
     @log
     async login(username: string, password: string) {
-        let rollen: Array<string>|undefined
+        const rollen: Array<string>|undefined = [ROLLE_ADMIN]
         try {
-            // this.basicAuthService.login(username, password)
-            rollen = await this.jwtService.login(username, password)
+            await this.basicAuthService.login(username, password)
+            console.log('---------------Before rollen')
+            // rollen = await this.jwtService.login(username, password)
+            console.log('-----------------After rollen')
         } catch (err) {
             this.isLoggedInEmitter.emit(false)
             this.rollenEmitter.emit([])
