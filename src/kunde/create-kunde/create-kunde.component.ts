@@ -123,7 +123,7 @@ export default class CreateKundeComponent implements OnInit {
         }
 
         const neuesKunde = Kunde.fromForm(this.form.value)
-        console.log('neuesKunde=', neuesKunde)
+        console.log('neuerKunde=', neuesKunde)
 
         const successFn: (location: string|undefined) => void =
             (location = undefined) => {
