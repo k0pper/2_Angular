@@ -42,7 +42,8 @@ export class AdminGuard implements CanActivate {
         }
 
         console.warn('Nicht in der Rolle "admin" eingeloggt')
-        return false
+        console.warn('Entwicklermodus durch Alex: canActivate() is true')
+        return true
     }
 
     toString() {

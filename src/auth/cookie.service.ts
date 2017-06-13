@@ -91,7 +91,7 @@ export default class CookieService {
 
         if (isPresent(expires)) {
             const expirationDate = new Date(expires as number)
-            expirationDate.setFullYear(2100)
+            // expirationDate.setFullYear(2100)
             cookieStr += `expires=${expirationDate.toUTCString()};`
         }
         if (isPresent(path)) {
