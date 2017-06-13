@@ -66,9 +66,12 @@ export default class CookieService {
      */
     private getCookie(name: string) {
         name = encodeURIComponent(name)
+        console.info(`encodeURIComponent: ${name.toString()}`)
         const regexp = new RegExp(`(?:^${name}|;\\s*${name})=(.*?)(?:;|$)`, 'g')
         // alle Cookies durchsuchen
         const result = regexp.exec(document.cookie)
+        console.info(`document.cookie: ${document.cookie}`)
+        console.info(`result: ${result}`)
         // z.B. %20 durch Leerzeichen ersetzen
         return (result === null) ? undefined : decodeURIComponent(result[1])
     }
@@ -88,6 +91,7 @@ export default class CookieService {
 
         if (isPresent(expires)) {
             const expirationDate = new Date(expires as number)
+            expirationDate.setFullYear(2100)
             cookieStr += `expires=${expirationDate.toUTCString()};`
         }
         if (isPresent(path)) {

@@ -110,11 +110,13 @@ export class AuthService {
         // z.B. 'admin,mitarbeiter'
         const rolesStr = this.cookieService.getRoles()
         if (rolesStr === undefined) {
+            console.warn(`roleStr is undefined`)
             return false
         }
 
         // z.B. ['admin', 'mitarbeiter']
         const rolesArray = rolesStr.split(',')
+        console.log(`roleStr is not undefined`)
         return isPresent(rolesArray) && rolesArray.includes(ROLLE_ADMIN)
     }
 

@@ -36,6 +36,7 @@ export default class NavComponent implements OnInit {
 
     @log
     ngOnInit() {
+        console.info('##### Nav.component.ts ngOnInit():39')
         this.isAdmin = this.authService.isAdmin()
         this.observeIsAdmin()
     }

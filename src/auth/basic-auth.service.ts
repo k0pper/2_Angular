@@ -73,7 +73,7 @@ export default class BasicAuthService {
         const json = await response.json()
         console.log('json', json)
         // Array von Strings als 1 String
-        const roles: Array<string> = ['ROLE_ADMIN']
+        const roles: Array<string> = ['admin']
         console.log(`roles=${roles}`)
 
         this.cookieService.saveAuthorization(
