@@ -38,12 +38,12 @@ export class AdminGuard implements CanActivate {
         Observable<boolean>|Promise<boolean>|boolean {
         if (this.authService.isAdmin()) {
             console.log('AdminGuard.canActivate(): admin')
+            console.warn('Entwicklermodus durch Alex: canActivate() is really true')
             return true
         }
 
         console.warn('Nicht in der Rolle "admin" eingeloggt')
-        console.warn('Entwicklermodus durch Alex: canActivate() is true')
-        return true
+        return false
     }
 
     toString() {
