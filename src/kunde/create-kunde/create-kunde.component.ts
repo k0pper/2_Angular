@@ -98,7 +98,7 @@ export default class CreateKundeComponent implements OnInit {
             homepage: this.homepage,
         })
 
-        this.titleService.setTitle('Neues Kunde')
+        this.titleService.setTitle('Neuer Kunde')
     }
 
     /**
