@@ -269,6 +269,44 @@
                 </div>
             </div>
 
+            <div class="form-group row"
+                [class.has-danger]="plz.touched">
+                <label for="plzInput" class="col col-2 form-control-label">
+                    PLZ *
+                </label>
+                <div class="col col-10">
+                    <input id="plzInput"
+                        placeholder="Plz"
+                        class="form-control form-control-danger"
+                        required
+                        minlength="2"
+                        formControlName="plz">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="plz.touched">
+                        Eine gültige PLZ ist notwendig!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row"
+                [class.has-danger]="ort.touched">
+                <label for="ortInput" class="col col-2 form-control-label">
+                    Ort *
+                </label>
+                <div class="col col-10">
+                    <input id="ortInput"
+                        placeholder="Ort"
+                        class="form-control form-control-danger"
+                        required
+                        minlength="2"
+                        formControlName="ort">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="ort.touched">
+                        Eine gültiger Ort ist notwendig!
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group row">
                 <div class="col col-10 offset-2">
                     <!-- Template-Syntax:

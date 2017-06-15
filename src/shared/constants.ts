@@ -28,7 +28,7 @@ export const BASE_URI = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`
 /**
  * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
  */
-export const PATH_KUNDE = `kunde`
+export const PATH_KUNDE = ``
 
 export const TIMEZONE_OFFSET_MS =
     new Date().getTimezoneOffset() * 60 * 1000

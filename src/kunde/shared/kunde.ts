@@ -35,6 +35,12 @@ export declare type FamilienstandType = 'L' | 'VH' | 'G' | 'VW'
  * Gemeinsame Datenfelder unabh&auml;ngig, ob die Kundedaten von einem Server
  * (z.B. RESTful Web Service) oder von einem Formular kommen.
  */
+
+export declare interface Adresse {
+    plz: string | undefined,
+    ort: string | undefined,
+}
+
 export interface KundeShared {
     _id?: string|undefined
     nachname?: string|undefined
@@ -46,6 +52,7 @@ export interface KundeShared {
     newsletter: boolean|undefined
     email: string|undefined
     homepage: string|undefined
+    adresse: Adresse
 }
 
 /**
@@ -74,6 +81,8 @@ export interface KundeForm extends KundeShared {
     sport?: boolean
     lesen?: boolean
     reisen?: boolean
+    plz: string|undefined
+    ort: string|undefined
 }
 
 /**
@@ -98,7 +107,8 @@ export class Kunde {
         const kunde = new Kunde(
             kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
             kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, /*kundeServer.rabatt,*/
-            kundeServer.newsletter, kundeServer.interessen, kundeServer.email, kundeServer.homepage)
+            kundeServer.newsletter, kundeServer.interessen, kundeServer.email, kundeServer.homepage,
+            kundeServer.adresse)
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
     }
@@ -119,6 +129,10 @@ export class Kunde {
         if (kundeForm.reisen) {
             interessen.push('R')
         }
+        const adresse: Adresse = {
+            plz: kundeForm.plz,
+            ort: kundeForm.ort,
+        }
 
         const datumMoment = isEmpty(kundeForm.geburtsdatum) ?
             undefined :
@@ -128,7 +142,7 @@ export class Kunde {
         const kunde = new Kunde(
             kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
             kundeForm.geschlecht, datumMoment, kundeForm.umsatz, /*rabatt,*/
-            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage)
+            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage, adresse)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
     }
@@ -283,6 +297,7 @@ export class Kunde {
             interessen: this.interessen,
             email: this.email,
             homepage: this.homepage,
+            adresse: this.adresse,
         }
     }
 
@@ -301,7 +316,8 @@ export class Kunde {
         public newsletter: boolean|undefined,
         public interessen: Array<string>|undefined,
         public email: string|undefined,
-        public homepage: string|undefined) {
+        public homepage: string|undefined,
+        public adresse: Adresse) {
         this._id = _id || undefined
         this.nachname = nachname || undefined
         // this.rating = rating || undefined
@@ -325,6 +341,7 @@ export class Kunde {
         // }
         this.email = email || undefined
         this.homepage = homepage || undefined
+        this.adresse = adresse || undefined
     }
 
     private resetInteresseType() {
