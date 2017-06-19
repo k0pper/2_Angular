@@ -48,9 +48,6 @@ export class AuthService {
         const rollen: Array<string>|undefined = [ROLLE_ADMIN]
         try {
             await this.basicAuthService.login(username, password)
-            console.log('---------------Before rollen')
-            // rollen = await this.jwtService.login(username, password)
-            console.log('-----------------After rollen')
         } catch (err) {
             this.isLoggedInEmitter.emit(false)
             this.rollenEmitter.emit([])
