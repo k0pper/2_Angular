@@ -22,14 +22,14 @@ import {EventEmitter, Inject, Injectable} from '@angular/core'
 // HttpModule enthaelt nur Services, keine Komponenten
 import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http'
 
-import {ChartConfiguration/*, ChartDataSets*/} from 'chart.js'
-// import * as _ from 'lodash'
+import {ChartConfiguration, ChartDataSets} from 'chart.js'
+import * as _ from 'lodash'
 
 import {AuthService} from '../../auth/auth.service'
 import {BASE_URI, isBlank, isEmpty, isPresent, log, PATH_KUNDE} from '../../shared'
 // Aus dem SharedModule als Singleton exportiert
 import DiagrammService from '../../shared/diagramm.service'
-import {Kunde, KundeForm, KundeServer} from './index'
+import {Kunde, KundeForm} from './index'
 
 // Methoden der Klasse Http
 //  * get(url, options) – HTTP GET request
@@ -112,6 +112,14 @@ export class KundeService {
         const searchParams = this.suchkriterienToSearchParams(suchkriterien)
         const uri = this.baseUriKunde
         console.log(`KundeService.find(): uri=${uri}`)
+        const headers = new Headers({'Content-Type': 'application/json'})
+        // let authorization = this.authService.getAuthorization()
+        const authorization = 'Basic YWRtaW46cA=='
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string)
+        }
+        console.warn(`authorization=${authorization}`)
+        const options: RequestOptionsArgs = {headers, search: searchParams}
 
         const nextFn: (response: Response) => void = response => {
             console.log('KundeService.find(): nextFn()')
@@ -143,7 +151,7 @@ export class KundeService {
         // http://stackoverflow.com/questions/34533197/what-is-the-difference-between-rx-observable-subscribe-and-foreach
         // https://xgrommx.github.io/rx-book/content/observable/observable_instance_methods/subscribe.html
         // tslint:enable:max-line-length
-        this.http.get(uri, {search: searchParams}).subscribe(nextFn, errorFn)
+        this.http.get(uri, options).subscribe(nextFn, errorFn)
 
         // Same-Origin-Policy verhindert Ajax-Datenabfragen an einen Server in
         // einer anderen Domain. JSONP (= JSON mit Padding) ermoeglicht die
@@ -169,6 +177,14 @@ export class KundeService {
         }
 
         const uri = `${this.baseUriKunde}/${id}`
+
+        const headers = new Headers({'Content-Type': 'application/json'})
+        const authorization = 'Basic YWRtaW46cA=='
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string)
+        }
+
+        const options: RequestOptionsArgs = {headers}
         const nextFn: ((response: Response) => void) = response => {
             this._kunde = this.responseToKunde(response)
             this.kundeEmitter.emit(this._kunde)
@@ -180,7 +196,7 @@ export class KundeService {
         }
 
         console.log('KundeService.findById(): GET-Request')
-        this.http.get(uri).subscribe(nextFn, errorFn)
+        this.http.get(uri, options).subscribe(nextFn, errorFn)
     }
 
     /**
@@ -270,7 +286,7 @@ export class KundeService {
         kunde: Kunde, successFn: () => void|undefined,
         errorFn: (status: number) => void) {
         const uri = `${this.baseUriKunde}/${kunde._id}`
-        const authorization = this.authService.getAuthorization()
+        const authorization = 'Basic YWRtaW46cA=='
         console.log(`authorization=${authorization}`)
         const headers = new Headers({Authorization: authorization})
         const options: RequestOptionsArgs = {headers}
@@ -315,6 +331,14 @@ export class KundeService {
     @log
     createBarChart(chartElement: HTMLCanvasElement) {
         const uri = this.baseUriKunde
+        const headers = new Headers({'Content-Type': 'application/json'})
+        const authorization = 'Basic YWRtaW46cA=='
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string)
+        }
+        const options: RequestOptionsArgs = {headers}
+        console.log('options=', options)
+
         const nextFn: ((response: Response) => void) = (response) => {
             if (response.status !== 200) {
                 console.error('response=', response)
@@ -325,19 +349,19 @@ export class KundeService {
             const labels =
                 kunden.map(kunde => kunde._id) as Array<string>
             console.log('KundeService.createBarChart(): labels: ', labels)
-            // const ratingData =
-            //     kunden.map(kunde => kunde.rating) as Array<number>
-
-            // const datasets: Array<ChartDataSets> =
-            //     [{label: 'Bewertung', data: ratingData}]
+            const betragData =
+                kunden.map(kunde => kunde.umsatz !== undefined ? kunde.umsatz.betrag : -1) as Array<number>
+            console.log('betragDATA=', betragData)
+            const datasets: Array<ChartDataSets> =
+                [{ label: 'Umsatz', data: betragData }]
             const config: ChartConfiguration = {
                 type: 'bar',
-                data: {labels/*,datasets*/},
+                data: { labels, datasets },
             }
             this.diagrammService.createChart(chartElement, config)
         }
 
-        this.http.get(uri).subscribe(nextFn)
+        this.http.get(uri, options).subscribe(nextFn)
     }
 
     /**
@@ -348,6 +372,13 @@ export class KundeService {
     @log
     createLinearChart(chartElement: HTMLCanvasElement) {
         const uri = this.baseUriKunde
+        const headers = new Headers({'Content-Type': 'application/json'})
+        const authorization = 'Basic YWRtaW46cA=='
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string)
+        }
+        const options: RequestOptionsArgs = {headers}
+        console.log('options=', options)
         const nextFn: ((response: Response) => void) = response => {
             if (response.status !== 200) {
                 console.error('response=', response)
@@ -371,7 +402,7 @@ export class KundeService {
             this.diagrammService.createChart(chartElement, config)
         }
 
-        this.http.get(uri).subscribe(nextFn)
+        this.http.get(uri, options).subscribe(nextFn)
     }
 
     /**
@@ -382,6 +413,13 @@ export class KundeService {
     @log
     createPieChart(chartElement: HTMLCanvasElement) {
         const uri = this.baseUriKunde
+        const headers = new Headers({'Content-Type': 'application/json'})
+        const authorization = 'Basic YWRtaW46cA=='
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string)
+        }
+        const options: RequestOptionsArgs = {headers}
+        console.log('options=', options)
         const nextFn: ((response: Response) => void) = response => {
             if (response.status !== 200) {
                 console.error('response=', response)
@@ -391,33 +429,33 @@ export class KundeService {
             const kunden = this.responseToArrayKunde(response)
             const labels =
                 kunden.map(kunde => kunde._id) as Array<string>
-            // const ratingData =
-            //     kunden.map(kunde => kunde.rating) as Array<number>
+            const betragData =
+                kunden.map(kunde => kunde.umsatz !== undefined ? kunde.umsatz.betrag : 0) as Array<number>
 
-            // const backgroundColor =
-            //     new Array<string>(ratingData.length)
-            // const hoverBackgroundColor =
-            //     new Array<string>(ratingData.length)
-            // _.times(ratingData.length, i => {
-            //     backgroundColor[i] = this.diagrammService.getBackgroundColor(i)
-            //     hoverBackgroundColor[i] =
-            //         this.diagrammService.getHoverBackgroundColor(i)
-            // })
+            const backgroundColor =
+                new Array<string>(betragData.length)
+            const hoverBackgroundColor =
+                new Array<string>(betragData.length)
+            _.times(betragData.length, i => {
+                backgroundColor[i] = this.diagrammService.getBackgroundColor(i)
+                hoverBackgroundColor[i] =
+                    this.diagrammService.getHoverBackgroundColor(i)
+            })
 
             const data: any = {
                 labels,
-                // datasets: [{
-                //     data: ratingData,
-                //     backgroundColor,
-                //     hoverBackgroundColor,
-                // }],
+                datasets: [{
+                    data: betragData,
+                    backgroundColor,
+                    hoverBackgroundColor,
+                }],
             }
 
             const config: ChartConfiguration = {type: 'pie', data}
             this.diagrammService.createChart(chartElement, config)
         }
 
-        this.http.get(uri).subscribe(nextFn)
+        this.http.get(uri, options).subscribe(nextFn)
     }
 
     toString() {
@@ -463,8 +501,10 @@ export class KundeService {
      */
     @log
     private responseToArrayKunde(response: Response) {
-        const jsonArray = response.json() as Array<KundeServer>
-        return jsonArray.map(jsonObjekt => Kunde.fromServer(jsonObjekt))
+        const jsonArray = response.json() as Array<any>
+        console.warn('response responseToArrayKunde:', response.json())
+        return jsonArray.map(jsonObjekt => Kunde.fromServer(jsonObjekt, jsonObjekt.links[0]
+        .href.slice(jsonObjekt.links[0].href - 24)))
     }
 
     /**
@@ -473,7 +513,8 @@ export class KundeService {
      */
     @log
     private responseToKunde(response: Response) {
-        const jsonObjekt = response.json() as KundeServer
-        return Kunde.fromServer(jsonObjekt)
+        const jsonObjekt = response.json() as any
+        console.warn('response responseToKunde:', response.json())
+        return Kunde.fromServer(jsonObjekt, jsonObjekt._links.self.href.slice(jsonObjekt._links.self.href - 24))
     }
 }

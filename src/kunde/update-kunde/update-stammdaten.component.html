@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-group row">
-        <label class="col col-2 form-control-label">GeschlechtType</label>
+        <label class="col col-2 form-control-label">Geschlecht</label>
         <div class="col col-10">
             <select class="form-control" formControlName="geschlecht">
                 <option value="M">Maennlich</option>
@@ -51,19 +51,9 @@
         </div>
     </div>
 
-    <!--<div class="form-group row">
-        <label for="ratingInput" class="col col-2 form-control-label">
-            Bewertung
-        </label>
-        <div class="col col-10">
-            <input id="ratingInput" type="range" min="0" max="5"
-                formControlName="rating">
-        </div>
-    </div>-->
-
     <div class="form-group row">
         <div class="col col-10 offset-2">
-            <button class="btn btn-primary" (click)="onUpdate()"
+            <button class="btn btn-secondary" (click)="onUpdate()"
                     [disabled]="form.pristine || !form.valid">
                 <i class="fa fa-check"></i>
                 <span class="ml-1">Stammdaten aktualisieren</span>

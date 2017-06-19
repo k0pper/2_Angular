@@ -43,7 +43,7 @@
             </td>
         </tr>
         <tr>
-            <td><label>GeschlechtType</label></td>
+            <td><label>Geschlecht</label></td>
             <td>
                 <span [ngSwitch]="kunde.geschlecht">
                     <span *ngSwitchCase="'M'">Maennlich</span>
@@ -58,11 +58,6 @@
                 {{kunde.datumFormatted}}<br/>
                 {{kunde.datumFromNow}}
             </td>
-        </tr>
-        <tr>
-            <td><label>Umsatz</label></td>
-            <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
-            <td>{{kunde.umsatz | currency: 'EUR': true}}</td>
         </tr>
         <!--<tr>
             <td><label>Rabatt</label></td>

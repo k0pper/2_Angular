@@ -111,14 +111,14 @@ export class Kunde {
      * @param kunde JSON-Objekt mit Daten vom RESTful Web Server
      * @return Das initialisierte Kunde-Objekt
      */
-    static fromServer(kundeServer: KundeServer) {
+    static fromServer(kundeServer: KundeServer, id: string) {
         let geburtsdatum: moment.Moment|undefined
         if (isPresent(kundeServer.geburtsdatum)) {
             const tmp = kundeServer.geburtsdatum as Array<number>
             geburtsdatum = moment(tmp)
         }
         const kunde = new Kunde(
-            kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
+            id.slice(id.length - 24), kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
             kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, /*kundeServer.rabatt,*/
             kundeServer.newsletter, kundeServer.interessen, kundeServer.email, kundeServer.homepage,
             kundeServer.adresse, kundeServer.waehrung, kundeServer.account)

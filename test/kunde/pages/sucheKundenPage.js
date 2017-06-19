@@ -23,20 +23,31 @@ const nachname = function(nachnameStr) {
     this.expect.element('@nachname').to.be.visible
     return this.clearValue('@nachname').setValue('@nachname', nachnameStr)
 }
-const druckausgabe = function() {
-    const {expect} = this
-    expect.element('@geschlecht').to.be.visible
-    this.click('@geschlecht')
-    expect.element('@druckausgabe').to.be.visible
-    return this.click('@druckausgabe')
+// const maennlich = function() {
+//     const {expect} = this
+//     expect.element('@geschlecht').to.be.visible
+//     this.click('@geschlecht')
+//     expect.element('@maennlich').to.be.visible
+//     return this.click('@maennlich')
+// }
+// const weiblich = function() {
+//     const {expect} = this
+//     expect.element('@geschlecht').to.be.visible
+//     this.click('@geschlecht')
+//     expect.element('@weiblich').to.be.visible
+//     return this.click('@weiblich')
+// }
+
+const verheiratet = function() {
+    this.expect.element('@verheiratet').to.be.visible
+    return this.click('@verheiratet')
 }
-const kindle = function() {
-    const {expect} = this
-    expect.element('@geschlecht').to.be.visible
-    this.click('@geschlecht')
-    expect.element('@kindle').to.be.visible
-    return this.click('@kindle')
+
+const ledig = function() {
+    this.expect.element('@ledig').to.be.visible
+    return this.click('@ledig')
 }
+
 const sport = function() {
     this.expect.element('@sport').to.be.visible
     return this.click('@sport')

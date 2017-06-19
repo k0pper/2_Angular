@@ -26,7 +26,7 @@ import {log} from '../../shared' // Das ist ein Test
     selector: 'hs-details-interessen',
     template: `
         <div class="form-group row" *ngFor="let interesse of values">
-            <div class="col col-11 offset-1">
+            <div class="col col-11">
                 <div class="checkbox">
                     <label [ngSwitch]="interesse">
                         <input type="checkbox" checked disabled class="checkbox">

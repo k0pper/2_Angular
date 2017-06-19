@@ -35,8 +35,8 @@
                     <th>Nr.</th>
                     <th>ID</th>
                     <th>Nachname</th>
-                    <th>GeschlechtType</th>
-                    <th>Schlagw&ouml;rter</th>
+                    <th>Geschlecht</th>
+                    <th>Interessen</th>
                     <th>
                         <span class="sr-only">Spalte f&uuml;r Details</span>
                     </th>
@@ -55,9 +55,9 @@
                         <td>{{b.nachname}}</td>
                         <td>
                             <span [ngSwitch]="b.geschlecht">
-                                <span *ngSwitchCase="'M'">Iwi GeschlechtType</span>
+                                <span *ngSwitchCase="'M'">Maennlich</span>
                                 <span *ngSwitchCase="'W'">
-                                    Hska GeschlechtType
+                                    Weiblich
                                 </span>
                                 <span *ngSwitchDefault>unbekannt</span>
                             </span>
@@ -66,10 +66,13 @@
                             <span *ngFor="let sw of b.interessen">
                                 <span [ngSwitch]="sw">
                                     <span *ngSwitchCase="'S'">
-                                        JavaScript<br>
+                                        Sport<br>
                                     </span>
                                     <span *ngSwitchCase="'L'">
-                                        TypeScript
+                                        Lesen
+                                    </span>
+                                    <span *ngSwitchCase="'R'">
+                                        Reisen
                                     </span>
                                 </span>
                             </span>
@@ -83,7 +86,7 @@
                                 <i class="fa fa-search-plus"></i>
                             </a>
                         </td>
-                        <td *ngIf="isAdmin">
+                        <td>
                             <a (click)="onRemove(b)" data-toggle="tooltip"
                                 title="Entfernen">
                                 <i class="fa fa-remove"></i>
