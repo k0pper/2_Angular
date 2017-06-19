@@ -46,6 +46,11 @@ export declare interface Umsatz {
     betrag: number | undefined,
 }
 
+export declare interface Account {
+    username: string | undefined,
+    password: string | undefined,
+}
+
 export interface KundeShared {
     _id?: string|undefined
     nachname?: string|undefined
@@ -57,6 +62,7 @@ export interface KundeShared {
     email: string|undefined
     homepage: string|undefined
     adresse: Adresse
+    account: Account|undefined
 }
 
 /**
@@ -115,7 +121,7 @@ export class Kunde {
             kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
             kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, /*kundeServer.rabatt,*/
             kundeServer.newsletter, kundeServer.interessen, kundeServer.email, kundeServer.homepage,
-            kundeServer.adresse, kundeServer.waehrung)
+            kundeServer.adresse, kundeServer.waehrung, kundeServer.account)
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
     }
@@ -144,6 +150,10 @@ export class Kunde {
             waehrung: kundeForm.waehrung,
             betrag: kundeForm.betrag,
         }
+        const account: Account = {
+            username: kundeForm.email,
+            password: 'p',
+        }
 
         const datumMoment = !isPresent(kundeForm.geburtsdatum) ?
             undefined :
@@ -153,7 +163,8 @@ export class Kunde {
         const kunde = new Kunde(
             kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
             kundeForm.geschlecht, datumMoment, umsatz, /*rabatt,*/
-            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage, adresse, kundeForm.waehrung)
+            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage, adresse, kundeForm.waehrung,
+            account)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
     }
@@ -298,18 +309,17 @@ export class Kunde {
         return {
             _id: this._id,
             nachname: this.nachname,
-            // rating: this.rating,
-            familienstand: this.familienstand,
-            geschlecht: this.geschlecht,
-            geburtsdatum,
-            umsatz: this.umsatz,
-            waehrung: this.waehrung,
-            // rabatt: this.rabatt,
-            newsletter: this.newsletter,
-            interessen: this.interessen,
             email: this.email,
+            newsletter: this.newsletter,
+            geburtsdatum,
+            waehrung: this.waehrung,
             homepage: this.homepage,
+            geschlecht: this.geschlecht,
+            familienstand: this.familienstand,
+            interessen: this.interessen,
+            umsatz: this.umsatz,
             adresse: this.adresse,
+            account: this.account,
         }
     }
 
@@ -329,7 +339,8 @@ export class Kunde {
         public email: string|undefined,
         public homepage: string|undefined,
         public adresse: Adresse,
-        public waehrung: string|undefined) {
+        public waehrung: string|undefined,
+        public account: Account|undefined) {
         this._id = _id || undefined
         this.nachname = nachname || undefined
         this.familienstand = familienstand || undefined
@@ -338,6 +349,7 @@ export class Kunde {
             isPresent(geburtsdatum) ? geburtsdatum : moment(new Date().toISOString())
         this.umsatz = umsatz || undefined
         this.waehrung = waehrung
+        this.account = account
         this.newsletter = newsletter || undefined
 
         if (isBlank(interessen)) {
@@ -354,6 +366,7 @@ export class Kunde {
         this.homepage = homepage || undefined
         this.adresse = adresse || undefined
         this.umsatz = umsatz || undefined
+        this.account = account || undefined
     }
 
     private resetInteresseType() {

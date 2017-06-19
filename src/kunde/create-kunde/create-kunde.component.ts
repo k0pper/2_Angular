@@ -87,12 +87,10 @@ export default class CreateKundeComponent implements OnInit {
         this.form = this.formBuilder.group({
             // siehe formControlName innerhalb @Component({template: ...})
             nachname: this.nachname,
-            // rating: this.rating,
             familienstand: this.familienstand,
             geschlecht: this.geschlecht,
             waehrung: this.waehrung,
             betrag: this.betrag,
-            // rabatt: this.rabatt,
             geburtsdatum: this.geburtsdatum,
             newsletter: this.newsletter,
             sport: this.sport,
@@ -102,7 +100,6 @@ export default class CreateKundeComponent implements OnInit {
             homepage: this.homepage,
             plz: this.plz,
             ort: this.ort,
-            // passt
         })
 
         this.titleService.setTitle('Neuer Kunde')
