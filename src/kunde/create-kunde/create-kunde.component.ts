@@ -51,7 +51,6 @@ export default class CreateKundeComponent implements OnInit {
     // readonly rating: FormControl = new FormControl(null)
     readonly familienstand: FormControl = new FormControl('VH')
     readonly geschlecht: FormControl = new FormControl(null)
-    readonly umsatz: FormControl = new FormControl(null)
     // readonly rabatt: FormControl = new FormControl(null)
     readonly geburtsdatum: FormControl = new FormControl(null)
     readonly newsletter: FormControl = new FormControl(false)
@@ -64,6 +63,8 @@ export default class CreateKundeComponent implements OnInit {
         new FormControl(null, [Validators.required, KundeValidator.homepage] as any)
     readonly plz: FormControl = new FormControl(null)
     readonly ort: FormControl = new FormControl(null)
+    readonly waehrung: FormControl = new FormControl(null)
+    readonly betrag: FormControl = new FormControl(null)
 
     showWarning = false
     fertig = false
@@ -89,7 +90,8 @@ export default class CreateKundeComponent implements OnInit {
             // rating: this.rating,
             familienstand: this.familienstand,
             geschlecht: this.geschlecht,
-            umsatz: this.umsatz,
+            waehrung: this.waehrung,
+            betrag: this.betrag,
             // rabatt: this.rabatt,
             geburtsdatum: this.geburtsdatum,
             newsletter: this.newsletter,

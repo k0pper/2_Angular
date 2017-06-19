@@ -41,12 +41,17 @@ export declare interface Adresse {
     ort: string | undefined,
 }
 
+export declare interface Umsatz {
+    waehrung: string | undefined,
+    betrag: number | undefined,
+}
+
 export interface KundeShared {
     _id?: string|undefined
     nachname?: string|undefined
     geschlecht?: GeschlechtType|undefined
     familienstand: FamilienstandType|undefined
-    umsatz: number|undefined
+    umsatz: Umsatz|undefined
     // rabatt: number|undefined
     geburtsdatum: Array<number>|undefined
     newsletter: boolean|undefined
@@ -83,6 +88,8 @@ export interface KundeForm extends KundeShared {
     reisen?: boolean
     plz: string|undefined
     ort: string|undefined
+    waehrung: string | undefined
+    betrag: number | undefined
 }
 
 /**
@@ -133,6 +140,10 @@ export class Kunde {
             plz: kundeForm.plz,
             ort: kundeForm.ort,
         }
+        const umsatz: Umsatz = {
+            waehrung: kundeForm.waehrung,
+            betrag: kundeForm.betrag,
+        }
 
         const datumMoment = !isPresent(kundeForm.geburtsdatum) ?
             undefined :
@@ -141,7 +152,7 @@ export class Kunde {
         // const rabatt = kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
         const kunde = new Kunde(
             kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
-            kundeForm.geschlecht, datumMoment, kundeForm.umsatz, /*rabatt,*/
+            kundeForm.geschlecht, datumMoment, umsatz, /*rabatt,*/
             kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage, adresse)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
@@ -218,7 +229,7 @@ export class Kunde {
      */
     updateStammdaten(
         nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType/*, rating: number*/,
-        geburtsdatum: moment.Moment|undefined, umsatz: number|undefined,
+        geburtsdatum: moment.Moment|undefined, umsatz: Umsatz|undefined,
         /*rabatt: number|undefined*/) {
         this.nachname = nachname
         this.familienstand = familienstand
@@ -312,7 +323,7 @@ export class Kunde {
         /*public rating: number|undefined,*/
         public familienstand: FamilienstandType|undefined,
         public geschlecht: GeschlechtType|undefined, public geburtsdatum: moment.Moment|undefined,
-        public umsatz: number|undefined, /*public rabatt: number|undefined,*/
+        public umsatz: Umsatz|undefined, /*public rabatt: number|undefined,*/
         public newsletter: boolean|undefined,
         public interessen: Array<string>|undefined,
         public email: string|undefined,
@@ -342,6 +353,7 @@ export class Kunde {
         this.email = email || undefined
         this.homepage = homepage || undefined
         this.adresse = adresse || undefined
+        this.umsatz = umsatz || undefined
     }
 
     private resetInteresseType() {

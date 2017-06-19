@@ -24,7 +24,6 @@ import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@ang
 
 import {ChartConfiguration/*, ChartDataSets*/} from 'chart.js'
 // import * as _ from 'lodash'
-// import * as moment from 'moment'
 
 import {AuthService} from '../../auth/auth.service'
 import {BASE_URI, isBlank, isEmpty, isPresent, log, PATH_KUNDE} from '../../shared'
@@ -198,18 +197,9 @@ export class KundeService {
             return
         }
 
-        // const jahr = neuesKunde.geburtsdatum[0]
-        // const monat = neuesKunde.geburtsdatum[1]
-        // const tag = neuesKunde.geburtsdatum[2]
-
-        // neuesKunde.geburtsdatum = moment(new Date(2000, 10, 10)).startOf('day')
-
-        // neuesKunde.geburtsdatum.year = jahr
-        // neuesKunde.geburtsdatum.month = monat
-        // neuesKunde.geburtsdatum.day = tag
-
         const uri = this.baseUriKunde
-        const body = JSON.stringify(neuesKunde.toJSON())
+        const kundeJson = neuesKunde.toJSON()
+        const body = JSON.stringify(kundeJson)
         console.log('body=', body)
 
         const headers = new Headers({'Content-Type': 'application/json'})
