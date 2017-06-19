@@ -21,7 +21,7 @@
 import * as moment from 'moment'
 import 'moment/locale/de'
 
-import {isBlank, isEmpty, isPresent} from '../../shared'
+import {isBlank, isPresent} from '../../shared'
 
 moment.locale('de')
 
@@ -48,7 +48,7 @@ export interface KundeShared {
     familienstand: FamilienstandType|undefined
     umsatz: number|undefined
     // rabatt: number|undefined
-    geburtsdatum: string|undefined
+    geburtsdatum: Array<number>|undefined
     newsletter: boolean|undefined
     email: string|undefined
     homepage: string|undefined
@@ -101,7 +101,7 @@ export class Kunde {
     static fromServer(kundeServer: KundeServer) {
         let geburtsdatum: moment.Moment|undefined
         if (isPresent(kundeServer.geburtsdatum)) {
-            const tmp = kundeServer.geburtsdatum as string
+            const tmp = kundeServer.geburtsdatum as Array<number>
             geburtsdatum = moment(tmp)
         }
         const kunde = new Kunde(
@@ -134,9 +134,9 @@ export class Kunde {
             ort: kundeForm.ort,
         }
 
-        const datumMoment = isEmpty(kundeForm.geburtsdatum) ?
+        const datumMoment = !isPresent(kundeForm.geburtsdatum) ?
             undefined :
-            moment(kundeForm.geburtsdatum as string)
+            moment(kundeForm.geburtsdatum as Array<number>)
 
         // const rabatt = kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
         const kunde = new Kunde(
@@ -283,7 +283,7 @@ export class Kunde {
     toJSON(): KundeServer {
         const geburtsdatum = this.geburtsdatum === undefined ?
             undefined :
-            this.geburtsdatum.format('YYYY-MM-DD')
+            this.geburtsdatum.toArray().slice(0, 3)
         return {
             _id: this._id,
             nachname: this.nachname,
