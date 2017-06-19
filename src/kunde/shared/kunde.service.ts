@@ -199,6 +199,7 @@ export class KundeService {
 
         const uri = this.baseUriKunde
         const kundeJson = neuesKunde.toJSON()
+        delete kundeJson.umsatz
         const body = JSON.stringify(kundeJson)
         console.log('body=', body)
 

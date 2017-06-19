@@ -52,7 +52,6 @@ export interface KundeShared {
     geschlecht?: GeschlechtType|undefined
     familienstand: FamilienstandType|undefined
     umsatz: Umsatz|undefined
-    // rabatt: number|undefined
     geburtsdatum: Array<number>|undefined
     newsletter: boolean|undefined
     email: string|undefined
@@ -72,6 +71,7 @@ export interface KundeShared {
 export interface KundeServer extends KundeShared {
     // rating: number|undefined
     interessen?: Array<string>|undefined
+    waehrung: string|undefined
 }
 
 /**
@@ -115,7 +115,7 @@ export class Kunde {
             kundeServer._id, kundeServer.nachname/*, kundeServer.rating*/, kundeServer.familienstand,
             kundeServer.geschlecht, geburtsdatum, kundeServer.umsatz, /*kundeServer.rabatt,*/
             kundeServer.newsletter, kundeServer.interessen, kundeServer.email, kundeServer.homepage,
-            kundeServer.adresse)
+            kundeServer.adresse, kundeServer.waehrung)
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
     }
@@ -153,7 +153,7 @@ export class Kunde {
         const kunde = new Kunde(
             kundeForm._id, kundeForm.nachname/*, +kundeForm.rating*/, kundeForm.familienstand,
             kundeForm.geschlecht, datumMoment, umsatz, /*rabatt,*/
-            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage, adresse)
+            kundeForm.newsletter, interessen, kundeForm.email, kundeForm.homepage, adresse, kundeForm.waehrung)
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
     }
@@ -303,6 +303,7 @@ export class Kunde {
             geschlecht: this.geschlecht,
             geburtsdatum,
             umsatz: this.umsatz,
+            waehrung: this.waehrung,
             // rabatt: this.rabatt,
             newsletter: this.newsletter,
             interessen: this.interessen,
@@ -320,7 +321,6 @@ export class Kunde {
     private constructor(
         // tslint:disable-next-line:variable-name
         public _id: string|undefined, public nachname: string|undefined,
-        /*public rating: number|undefined,*/
         public familienstand: FamilienstandType|undefined,
         public geschlecht: GeschlechtType|undefined, public geburtsdatum: moment.Moment|undefined,
         public umsatz: Umsatz|undefined, /*public rabatt: number|undefined,*/
@@ -328,16 +328,16 @@ export class Kunde {
         public interessen: Array<string>|undefined,
         public email: string|undefined,
         public homepage: string|undefined,
-        public adresse: Adresse) {
+        public adresse: Adresse,
+        public waehrung: string|undefined) {
         this._id = _id || undefined
         this.nachname = nachname || undefined
-        // this.rating = rating || undefined
         this.familienstand = familienstand || undefined
         this.geschlecht = geschlecht || undefined
         this.geburtsdatum =
             isPresent(geburtsdatum) ? geburtsdatum : moment(new Date().toISOString())
         this.umsatz = umsatz || undefined
-        // this.rabatt = rabatt || undefined
+        this.waehrung = waehrung
         this.newsletter = newsletter || undefined
 
         if (isBlank(interessen)) {
