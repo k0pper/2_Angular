@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="1">
+
+  <testsuite name="kunde.Tortendiagramm"
+    errors="0" failures="0" hostname="" id="" package="kunde" skipped="0"
+    tests="1" time="5.792" timestamp="Wed, 21 Jun 2017 16:41:51 GMT">
+  
+    <testcase name="Tortendiagramm anzeigen" classname="kunde.Tortendiagramm" time="5.792" assertions="16">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

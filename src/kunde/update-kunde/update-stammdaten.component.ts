@@ -97,8 +97,8 @@ export default class UpdateStammdatenComponent implements OnInit {
         // rating, umsatz und rabatt koennen im Formular nicht geaendert werden
         this.kunde.updateStammdaten(
             this.nachname.value, this.familienstand.value, this.geschlecht.value,
-            /*this.rating.value,*/ this.kunde.geburtsdatum, this.kunde.umsatz,
-            /*this.kunde.rabatt*/)
+            // this.kunde.geburtsdatum, this.kunde.umsatz
+            )
         console.log('kunde=', this.kunde)
 
         const successFn = () => {

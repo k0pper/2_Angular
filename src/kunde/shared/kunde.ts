@@ -239,18 +239,14 @@ export class Kunde {
      * @param umsatz Der neue Umsatz
      */
     updateStammdaten(
-        nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType/*, rating: number*/,
-        geburtsdatum: moment.Moment|undefined, umsatz: Umsatz|undefined,
-        /*rabatt: number|undefined*/) {
+        nachname: string, familienstand: FamilienstandType, geschlecht: GeschlechtType,
+        // geburtsdatum: moment.Moment|undefined, umsatz: Umsatz|undefined
+        ) {
         this.nachname = nachname
         this.familienstand = familienstand
         this.geschlecht = geschlecht
-        // this.rating = rating
-        // this.ratingArray = []
-        // _.times(rating - MIN_RATING, () => this.ratingArray.push(true))
-        this.geburtsdatum = geburtsdatum
-        this.umsatz = umsatz
-        // this.rabatt = rabatt
+        // this.geburtsdatum = geburtsdatum
+        // this.umsatz = umsatz
     }
 
     /**

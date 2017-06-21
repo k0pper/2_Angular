@@ -32,7 +32,7 @@ export default {
     'Kunde mit Nachname "Gamma" aktualisieren'() {
         // Given
         const nachname = 'Gamma'
-        const neuerNachname = 'Geaendert'
+        const neuerNachname = 'Gamma'
         const {page} = this.client
 
         // When

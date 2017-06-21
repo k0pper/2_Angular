@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="1">
+
+  <testsuite name="auth.Auth"
+    errors="0" failures="0" hostname="" id="" package="auth" skipped="0"
+    tests="1" time="5.938" timestamp="Wed, 21 Jun 2017 16:41:00 GMT">
+  
+    <testcase name="Login mit gueltigen Daten" classname="auth.Auth" time="5.938" assertions="14">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

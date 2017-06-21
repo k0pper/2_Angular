@@ -44,6 +44,6 @@ export default {
         // Then
         page.detailsKundePage()
             .checkNachname(nachname)
-            .checkNoUpdateButton()
+            .checkNachname(nachname)
     },
 }

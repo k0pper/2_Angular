@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="kunde.DeleteKunde"
+    errors="0" failures="1" hostname="" id="" package="kunde" skipped="0"
+    tests="1" time="11.67" timestamp="Wed, 21 Jun 2017 16:41:14 GMT">
+  
+    <testcase name="Kunde mit Nachname &quot;Epsilon&quot; loeschen" classname="kunde.DeleteKunde" time="11.67" assertions="16">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Expected element &lt;div[class=text-danger] i[class=&quot;fa fa-exclamation-circle&quot;]&gt; to be visible - element was not found">    at Page.checkFehlermeldung (C:/Zimmermann/2Abgabe/GIT_REPOSITORY/2_Angular/test/kunde/pages/sucheKundenPage.js:108:17)
+    at Object.KundeMitNachnameEpsilonLoeschen [as Kunde mit Nachname &quot;Epsilon&quot; loeschen] (C:/Zimmermann/2Abgabe/GIT_REPOSITORY/2_Angular/test/kunde/DeleteKunde.js:55:14)</failure>
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

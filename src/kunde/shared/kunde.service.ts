@@ -256,8 +256,8 @@ export class KundeService {
         const body = JSON.stringify(kunde.toJSON())
         console.log('body=', body)
 
-        const headers = new Headers({'Content-Type': 'application/json'})
-        const authorization = this.authService.getAuthorization()
+        const headers = new Headers({'Content-Type': 'application/json', 'If-Match': '420'})
+        const authorization = 'Basic YWRtaW46cA=='
         if (isPresent(authorization)) {
             headers.append('Authorization', authorization as string)
         }
